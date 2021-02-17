@@ -1,5 +1,7 @@
 {
   "name": "TFD",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
