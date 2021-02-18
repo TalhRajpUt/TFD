@@ -9,15 +9,15 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('../home/tab1.module').then(m => m.Tab1PageModule)
+        loadChildren: () => import('./home/tab1.module').then(m => m.Tab1PageModule)
       },
       {
         path: 'search',
-        loadChildren: () => import('../search/tab2.module').then(m => m.Tab2PageModule)
+        loadChildren: () => import('./search/tab2.module').then(m => m.Tab2PageModule)
       },
       {
         path: 'form',
-        loadChildren: () => import('../forum/tab3.module').then(m => m.Tab3PageModule)
+        loadChildren: () => import('./forum/tab3.module').then(m => m.Tab3PageModule)
       },
       {
         path: '',

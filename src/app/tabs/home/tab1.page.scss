@@ -1,0 +1,46 @@
+ion-header {
+    ion-toolbar {
+        // --background: var(--ion-color-medium);
+        ion-icon {
+            font-size: xxx-large;
+            margin: 0px 5px;
+        }
+        ion-title {
+            color: var(--ion-color-danger);
+            font-size: xx-large;
+            font-weight: 600;
+            letter-spacing: 10px;
+            filter: blur(1px);
+        }
+    }
+}
+
+ion-content {
+    --background: var(--ion-color-light);
+
+    .tweet-info {
+        font-size: 0.9em;
+    }
+
+    .name {
+        font-weight: 600;
+    }
+
+    .handle {
+        padding-left: 4px;
+        color: var(--ion-color-medium);
+    }
+
+    .wrapper {
+        border-bottom: 1px solid var(--ion-color-light);
+    }
+
+    .highlight {
+        color: var(--ion-color-primary);
+    }
+
+    .preview-img {
+        border: 1px solid var(--ion-color-light);
+        border-radius: 10px;
+    }
+}
