@@ -1,9 +1,9 @@
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
 import { Platform } from '@ionic/angular';
 import { ServiceService } from './../../service/service.service';
 import { Component } from '@angular/core';
 import { HTTP } from '@ionic-native/http/ngx';
-
-
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -20,10 +20,12 @@ export class Tab1Page {
   };
   basketball = true;
   footbal = false;
+  spinner = false;
   id;
   reader = false;
-  segment = 'Reports';
-  constructor(private http: HTTP, private service: ServiceService, private platform: Platform) {
+  segment = 'youtube';
+  constructor(private http: HTTP, private service: ServiceService, private platform: Platform,
+              private iab: InAppBrowser, private youtube: YoutubeVideoPlayer) {
     this.platform.ready().then(() => {
       this.tweetRequest();
     });
@@ -68,7 +70,7 @@ export class Tab1Page {
     }
   }
 
-  activeSeation(index) {
+  async activeSeation(index) {
     switch (index) {
       case 1:
         if (this.basketball) {
@@ -87,12 +89,20 @@ export class Tab1Page {
         this.reader = false;
         break;
       case 3:
+        console.log('Tab is activated');
         if (this.reader) {
-          return;
+
+        }else{
+          this.reader = !this.reader;
+          this.basketball = false;
+          this.footbal = false;
+          this.spinner = true;
+          console.log('Spinner is True');
+          await new Promise(resolve => setTimeout(resolve, 5000));
+          console.log('Spinner is False');
+          this.spinner = false;
         }
-        this.reader = !this.reader;
-        this.basketball = false;
-        this.footbal = false;
+
         break;
       default:
         break;
@@ -101,6 +111,14 @@ export class Tab1Page {
 
   loadVideos(){
     console.log('Loading Videos hahahaha');
+  }
+
+  openTwitterLink(url): void{
+    if (url === undefined || url === '' || url === null){
+      return;
+    }
+    this.iab.create(url, '_blank', {hideurlbar: 'no', fullscreen: 'no', hidespinner: 'no',
+      hidenavigationbuttons: 'yes', zoom: 'no', location: 'no', clearcache: 'yes', toolbar: 'yes', closebuttoncaption: 'Close'});
   }
 
 }

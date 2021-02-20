@@ -7,6 +7,16 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  spinner = false;
+  constructor() {
+    this.loadUrl();
+  }
 
+  async loadUrl(){
+    this.spinner = true;
+    console.log('Spinner is True');
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log('Spinner is False');
+    this.spinner = false;
+  }
 }
