@@ -1,61 +1,137 @@
 <ion-header>
-    <ion-toolbar >
-            <ion-icon slot="start" color="dark" name="basketball"></ion-icon>
-            <ion-icon slot="start" color="dark" name="football"></ion-icon>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="activeSeation(1)">
+        <ion-icon slot="icon-only" size=large [color]="basketball ? 'primary' : 'dark'" name="basketball"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button (click)="activeSeation(2)">
+        <ion-icon slot="icon-only" size=large [color]="footbal ? 'primary' : 'dark'" name="football"></ion-icon>
+      </ion-button>
+    </ion-buttons>
 
-            <ion-title class="ion-text-center">TFD</ion-title>
-
-            <ion-icon slot="end" color="dark" name="reader"></ion-icon>
-    </ion-toolbar>
+    <ion-title class="ion-text-center">TFD</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="activeSeation(3)">
+        <ion-icon slot="icon-only" size=large [color]="reader ? 'primary' : 'dark'" name="reader"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
 
+<ion-content [fullscreen]="true" scrollEvents="true">
 
-    <ion-row class="wrapper">
-        <ion-col size="2">
-          <ion-avatar>
-            <ion-img [src]="tweet.img"></ion-img>
-          </ion-avatar>
+  <ion-segment scrollable mode=md [(ngModel)]="segment" (ionChange)='tweetRequest()'>
+    <ion-segment-button value="Reports">
+      <ion-label>Reprots</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Beat">
+      <ion-label>Beat Writers</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Fantasy">
+      <ion-label>Fantasy</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Injuries">
+      <ion-label>Injuries</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="youtube">
+      <ion-icon size=large color='danger' name='logo-youtube'></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Skelton Layout -->
+  <ion-row [hidden]='!isLoading' class="wrapper" *ngFor="let item of [1,1,1,1,1]">
+    <ion-col size="2">
+      <ion-avatar>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+    </ion-col>
+    <ion-col size="10">
+      <ion-row class="tweet-info">
+        <ion-col size="12">
+          <span class="name">
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </span>
         </ion-col>
-        <ion-col size="10">
-          <ion-row class="tweet-info">
-            <ion-col size="12">
-              <span class="name">{{ tweet.username }}</span>
-              <span class="handle">@{{ tweet.handle }}</span>
-              <span class="handle">- {{ tweet.date*1000 | date: 'shortDate' }}</span>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <div [innerHtml]="tweet.text"></div>
-              <img class="preview-img" [src]="tweet.attachment" alt=''>
-            </ion-col>
-          </ion-row>
-          <ion-row class="ion-justify-content-start">
-            <ion-col>
-              <ion-button fill="clear" color="medium" size="small">
-                <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
-                {{ tweet.response }}
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="tweet.retweet = !tweet.retweet" fill="clear" [color]="tweet.retweet ? 'primary' : 'medium'" size="small">
-                <ion-icon name="repeat-outline" slot="start"></ion-icon>
-                {{ tweet.retweets }}
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="tweet.liked = !tweet.liked" fill="clear" [color]="tweet.liked ? 'primary' : 'medium'" size="small">
-                <ion-icon name="heart-outline" slot="start"></ion-icon>
-                {{ tweet.like }}
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button fill="clear" color="medium" size="small">
-                <ion-icon name="share-outline" slot="start"></ion-icon>
-              </ion-button>
-            </ion-col>
-          </ion-row>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <div>
+            <ion-text>
+              <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-text>
+            <ion-text>
+              <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-text>
+            <ion-text>
+              <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-text>
+          </div>
+          <div style="margin-top: 5%;">
+            <ion-skeleton-text animated style="width: 100%; height: 100px"></ion-skeleton-text>
+          </div>
         </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <!-- Real Data -->
+  <div *ngIf="!isLoading">
+    <ion-row class="wrapper" *ngFor="let tweet of tweets">
+      <ion-col size="2">
+        <ion-avatar>
+          <img [src]="tweet.user.profile_image_url_https" alt=""/>
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="10">
+        <ion-row class="tweet-info">
+          <ion-col size="12">
+            <span class="name">{{ tweet.user.name }} <img *ngIf="tweet.user.verified === true" height="13px" width="13px"  src="https://img.icons8.com/color/48/000000/instagram-verification-badge.png" alt=""/></span>
+            <span class="handle">@{{ tweet.user.screen_name }}</span>
+            <span class="handle">• {{ tweet.created_at | date: 'shortTime' }}</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-label color="primary" *ngIf="tweet.entities.hashtags.length !== 0">
+            <span *ngFor="let hashtag of tweet.entities.hashtags" >
+              #{{ hashtag.text }}
+            </span>
+          </ion-label>
+          <ion-label color="primary" *ngIf="tweet.entities.user_mentions.length !== 0" >
+            <span *ngFor="let mention of tweet.entities.user_mentions" >
+              @{{ mention.screen_name }}
+            </span>
+          </ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <span [innerText]='tweet.text'></span>
+            <div *ngIf="tweet.entities.media !== 'undefined'"></div>
+            <img *ngFor="let media of tweet.entities.media"  class="preview-img" [src]="media.media_url_https" alt=''>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-start">
+          <ion-col>
+            <ion-button fill="clear" color="primary" size="small">
+              <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
+              {{ tweet.response }}
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button fill="clear" color="primary" size="small">
+              <ion-icon name="repeat-outline" slot="start"></ion-icon>
+              {{ tweet.retweet_count }}
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button fill="clear" color="primary" size="small">
+              <ion-icon name="heart-outline" slot="start"></ion-icon>
+              {{ tweet.favorite_count }}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
     </ion-row>
+  </div>
 </ion-content>

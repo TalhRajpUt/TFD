@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
-
+import { Platform } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -8,7 +10,10 @@ import { NavController } from '@ionic/angular';
 })
 export class AppComponent {
   login = false;
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+              private platform: Platform,
+              private splashScreen: SplashScreen,
+              private statusBar: StatusBar) {
     this.validateLogin();
   }
 
@@ -18,5 +23,12 @@ export class AppComponent {
     }else{
       this.navCtrl.navigateRoot('/tabs');
     }
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
   }
 }

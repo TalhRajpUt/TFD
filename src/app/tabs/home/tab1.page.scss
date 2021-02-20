@@ -1,22 +1,30 @@
 ion-header {
     ion-toolbar {
-        // --background: var(--ion-color-medium);
-        ion-icon {
-            font-size: xxx-large;
-            margin: 0px 5px;
+        ion-button{
+            padding: 0px !important;
+            width: auto !important;
         }
         ion-title {
             color: var(--ion-color-danger);
             font-size: xx-large;
             font-weight: 600;
-            letter-spacing: 10px;
+            letter-spacing: 7px;
             filter: blur(1px);
         }
     }
 }
 
 ion-content {
-    --background: var(--ion-color-light);
+    // --background: var(--ion-color-light);
+
+    ion-segment {
+        z-index: 10;
+        background: var(--ion-color-medium);
+    }
+    
+    ion-segment-button {
+        text-transform: none;
+    }
 
     .tweet-info {
         font-size: 0.9em;
@@ -28,7 +36,7 @@ ion-content {
 
     .handle {
         padding-left: 4px;
-        color: var(--ion-color-medium);
+        color: var(--ion-color-tertiary);
     }
 
     .wrapper {
@@ -40,7 +48,15 @@ ion-content {
     }
 
     .preview-img {
-        border: 1px solid var(--ion-color-light);
+        border: 3px solid var(--ion-color-dark);
         border-radius: 10px;
+        height: 150px !important;
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
+
+    ion-avatar{
+        height: 50px !important;
+        width: 50px !important;
     }
 }
