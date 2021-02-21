@@ -78,4 +78,26 @@ ion-content {
         height: unset;
         top: 30%;
     }
+
+
+    ion-card{
+        margin: 5px;
+        ion-card-title{
+            font-size: initial;
+            font-weight: 600;
+        }
+        ion-label{
+            font-weight: 600;
+            line-height: 30px;
+        }
+    }
+
+    ion-spinner{
+        height: 50px;
+        width: 50px;
+        z-index: 11;
+        position: absolute;
+        top: 50%;
+        left: 45%;
+    }
 }

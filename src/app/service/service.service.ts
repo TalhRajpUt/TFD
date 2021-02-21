@@ -10,6 +10,10 @@ export class ServiceService {
   token = 'Bearer AAAAAAAAAAAAAAAAAAAAALHRMAEAAAAAF4H00EKyrqrDIZFyYDfm2FyRFTg%3D9syNG1vDJ9k1kLxqIMPq1p0AEWWk8qQwrIeDmfkFiehu3r2WLR';
   injuryAnalysisBaskitball = '1362811246928683012';
   fantsyBasketball = '1362811051688030216';
+  youtubeApiKey = 'AIzaSyCnRPNldC2EgEnGpWJkm4uEwVOSqqjY3qM';
+  youtubeUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=';
+  chanelID = 'UC_RSmHtpdXN-0LZw6kljPCA';
+  maxCount = 50;
   beatBaskitball = '1362810902601469954';
   reportsBaskitball = '1362810368104407043';
   constructor(public toastController: ToastController) {

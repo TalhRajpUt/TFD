@@ -21,9 +21,13 @@ export class Tab1Page {
   basketball = true;
   footbal = false;
   spinner = false;
+  youtubeLoader = false;
   id;
   reader = false;
-  segment = 'youtube';
+  segment = 'Reports';
+  videosData: any = [];
+  videos: any = [];
+  nextPage = '';
   constructor(private http: HTTP, private service: ServiceService, private platform: Platform,
               private iab: InAppBrowser, private youtube: YoutubeVideoPlayer) {
     this.platform.ready().then(() => {
@@ -47,7 +51,7 @@ export class Tab1Page {
         this.id = this.service.injuryAnalysisBaskitball;
         break;
       case 'youtube':
-        this.loadVideos();
+        this.loadVideos('');
         this.id = false;
         break;
       default:
@@ -59,15 +63,14 @@ export class Tab1Page {
       await this.http.get('https://api.twitter.com/1.1/lists/statuses.json?list_id=' + this.id + '&count=500', {}, {
         Authorization: this.service.token
       }).then((response) => {
-        this.isLoading = false;
         this.tweets = response.data;
         this.tweets = JSON.parse(this.tweets);
         console.log(this.tweets);
       }, (error) => {
-        this.isLoading = false;
         console.log('Console Error', error);
       });
     }
+    this.isLoading = false;
   }
 
   async activeSeation(index) {
@@ -109,8 +112,27 @@ export class Tab1Page {
     }
   }
 
-  loadVideos(){
-    console.log('Loading Videos hahahaha');
+  async loadVideos(event){
+    let baseUrl = '';
+    this.youtubeLoader = true;
+    baseUrl = this.service.youtubeUrl + this.service.chanelID +
+    '&order=date&type=video&maxResults=10&pageToken=' + this.nextPage + '&key=' + this.service.youtubeApiKey;
+    await this.http.get(baseUrl, {}, {}).then((response) => {
+      this.videosData = response.data;
+      this.videosData = JSON.parse(this.videosData);
+      console.log(this.videosData);
+      this.videos = this.videos.concat(this.videosData.items);
+      console.log(this.videos);
+      this.nextPage = this.videosData.nextPageToken;
+      console.log(this.nextPage);
+      if (this.videos.length >= this.videosData.pageInfo.totalResults){
+        event.enable(false);
+      }
+    }, (error) => {
+      console.log(error.error);
+    });
+    console.log(this.isLoading);
+    this.youtubeLoader = false;
   }
 
   openTwitterLink(url): void{
@@ -119,6 +141,10 @@ export class Tab1Page {
     }
     this.iab.create(url, '_blank', {hideurlbar: 'no', fullscreen: 'no', hidespinner: 'no',
       hidenavigationbuttons: 'yes', zoom: 'no', location: 'no', clearcache: 'yes', toolbar: 'yes', closebuttoncaption: 'Close'});
+  }
+
+  playVideo(id){
+    this.youtube.openVideo(id);
   }
 
 }
