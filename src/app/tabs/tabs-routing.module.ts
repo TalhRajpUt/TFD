@@ -20,16 +20,24 @@ const routes: Routes = [
         loadChildren: () => import('./forum/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+        path: 'setting',
+        loadChildren: () => import('./setting/setting.module').then(m => m.SettingPageModule)
+      },
+      {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/setting',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/tabs/setting',
     pathMatch: 'full'
+  },
+  {
+    path: 'setting',
+    loadChildren: () => import('./setting/setting.module').then( m => m.SettingPageModule)
   }
 ];
 

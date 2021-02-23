@@ -142,11 +142,11 @@
     </ion-row>
   </div>
 
-  <ion-spinner color='danger' *ngIf="youtubeLoader" ></ion-spinner>
+  <ion-spinner color='danger' *ngIf="youtubeLoader"></ion-spinner>
   <!-- Real Data For Youtube Player -->
   <div *ngIf="!isLoading && segment === 'youtube'">
     <ion-card *ngFor="let video of videos">
-
+      <ion-img (click)="playVideo(video.id.videoId)" [src]="video.snippet.thumbnails.high.url" alt="ion"></ion-img>
       <ion-row class="wrapper">
         <ion-col size=2>
           <ion-avatar item-left>
@@ -154,18 +154,16 @@
           </ion-avatar>
         </ion-col>
         <ion-col size=10>
-            <ion-card-title color="secondary">{{ video.snippet.title }}</ion-card-title>
-            <ion-label color="tertiary">
-              <span>{{ video.snippet.channelTitle }} • {{ video.snippet.publishTime | date: 'mediumDate' }} {{
-                video.snippet.publishTime | date: 'shortTime' }}</span>
-            </ion-label>
+          <ion-card-title color="secondary">{{ video.snippet.title }}</ion-card-title>
+          <ion-label color="tertiary">
+            <span>{{ video.snippet.channelTitle }} • {{ video.snippet.publishTime | date: 'mediumDate' }} {{
+              video.snippet.publishTime | date: 'shortTime' }}</span>
+          </ion-label>
         </ion-col>
       </ion-row>
     </ion-card>
     <ion-infinite-scroll color="primary" (ionInfinite)="loadVideos($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="lines"
-        loadingText="Loading more Videos...">
+      <ion-infinite-scroll-content loadingSpinner="lines" loadingText="Loading more Videos...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>

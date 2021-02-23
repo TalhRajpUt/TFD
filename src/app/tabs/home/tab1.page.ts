@@ -24,7 +24,7 @@ export class Tab1Page {
   youtubeLoader = false;
   id;
   reader = false;
-  segment = 'Reports';
+  segment = 'youtube';
   videosData: any = [];
   videos: any = [];
   nextPage = '';
@@ -127,6 +127,9 @@ export class Tab1Page {
       console.log(this.nextPage);
       if (this.videos.length >= this.videosData.pageInfo.totalResults){
         event.enable(false);
+      }
+      if (event !== null){
+        event.target.complete();
       }
     }, (error) => {
       console.log(error.error);

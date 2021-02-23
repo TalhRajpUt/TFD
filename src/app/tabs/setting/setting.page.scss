@@ -1,0 +1,44 @@
+.header{
+    background-color: var(--ion-color-dark);
+    height: 20%;
+    ion-title{
+        margin-top: 5%;
+        color: white;
+        font-size: x-large;
+        font-weight: 600;
+    }
+    ion-card-content{
+        color: var(--ion-color-tertiary);
+        font-weight: 600;
+    }
+}
+
+.body{
+    margin-top: -8%;
+    ion-list{
+        border-radius: 30px;
+        ion-list-header{
+            margin-left: 2%;
+            font-size: large;
+            margin-top: 2%;
+            font-weight: 900;
+            color: #a0a0a0;
+        }
+        ion-item{
+            margin-top: -2%;
+            margin-left: 2%;
+            font-weight: 600;
+            font-size: large;
+            ion-label{
+                color: var(--ion-color-dark);
+            }
+        }
+    }
+    ion-button{
+        display: block;
+        font-size: larger;
+        width: 90%;
+        margin: auto;
+        margin-bottom: 5px !important;
+    }
+}

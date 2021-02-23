@@ -1,3 +1,126 @@
-<ion-content [fullscreen]="true">
+<ion-header mode="ios">
+    <ion-toolbar mode="ios">
+      <ion-item Lines=none>
+        <ion-label>Search by Username</ion-label>
+        <ion-toggle color="primary" (ionChange)='trigerEvent($event)' slot="end"></ion-toggle>
+      </ion-item>
+      <ion-searchbar [(ngModel)]="query" (ionChange)='searchQuery()' (ionClear)='clearSearch()' placeholder="Who's your favourite player.." mode="ios"></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
 
+<ion-content [fullscreen]="true">
+    <div [hidden]='!spinner' class='spinner'>
+        <ion-spinner name='lines'></ion-spinner>
+    </div>
+
+    <div *ngIf="noResult"  class="ion-text-center">
+      <ion-img id="noResult" src='../../../assets/noTweet.svg' alt='Media not Found'></ion-img>
+      <ion-label>Try something else</ion-label>
+    </div>
+
+    <div *ngIf="spinner === false && noResult === false && searchByUsername">
+        <ion-row class="wrapper" *ngFor="let tweet of tweets">
+          <ion-col size="2">
+            <ion-avatar>
+              <ion-img  [src]="users[0].profile_image_url" alt=""></ion-img>
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="10">
+            <ion-row class="tweet-info">
+              <ion-col size="12">
+                  <span class="name">{{ users[0].name }} <img *ngIf="users[0].verified === true" height="13px"
+                    width="13px" src="../../../assets/badge.png" alt="" /></span>
+                  <span class="handle">@{{ users[0].username }}</span>
+                <span class="handle">• {{ tweet.created_at | date: 'shortTime' }}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-label color="primary" *ngIf="tweet.entities !== undefined && tweet.entities.hashtags !== undefined">
+                <span *ngFor="let hashtag of tweet.entities.hashtags">
+                  #{{ hashtag.tag }}
+                </span>
+              </ion-label>
+              <ion-label color="primary" *ngIf="tweet.entities !== undefined && tweet.entities.mentions !== undefined">
+                <span *ngFor="let mention of tweet.entities.mentions">
+                  @{{ mention.username }}
+                </span>
+              </ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <span [innerText]='tweet.text'></span><br>
+                <ion-label *ngIf="tweet.entities !== undefined && tweet.entities.urls !== undefined" (click)="openTwitterLink(tweet.entities.urls[0].url)"
+                  color="primary">{{ tweet.entities.urls[0].url }}</ion-label>
+                <div *ngIf="tweet.attachments !== undefined && tweet.attachments.media_keys !== undefined">
+                    <div *ngFor="let img of media">
+                        <ion-img class="preview-img" *ngIf="img.media_key === tweet.attachments.media_keys[0] && img.type === 'video'"  [src]="img.preview_image_url" alt=""></ion-img>
+                        <ion-img class="preview-img" *ngIf="img.media_key === tweet.attachments.media_keys[0] && img.type === 'photo'"  [src]="img.url" alt=""></ion-img>
+                    </div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-infinite-scroll color="primary" (ionInfinite)="eventSearch($event)" distance='1%'>
+          <ion-infinite-scroll-content loadingSpinner="lines">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+
+    <div *ngIf="spinner === false && noResult === false && !searchByUsername">
+      <ion-row class="wrapper" *ngFor="let tweet of tweets">
+        <ion-col size="2">
+          <div *ngFor="let user of users">
+            <ion-avatar *ngIf="user.id === tweet.author_id" >
+              <ion-img [src]="user.profile_image_url" alt=""></ion-img>
+            </ion-avatar>
+          </div>
+        </ion-col>
+        <ion-col size="10">
+          <ion-row class="tweet-info">
+            <ion-col size="12">
+              <div *ngFor="let user of users">
+                <div *ngIf="user.id === tweet.author_id">
+                  <span class="name">{{ user.name }} <img *ngIf="user.verified === true" height="13px"
+                    width="13px" src="../../../assets/badge.png" alt="" /></span>
+                  <span class="handle">@{{ user.username }}</span>
+                  <span class="handle">• {{ tweet.created_at | date: 'shortTime' }}</span>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-label color="primary" *ngIf="tweet.entities !== undefined && tweet.entities.hashtags !== undefined">
+              <span *ngFor="let hashtag of tweet.entities.hashtags">
+                #{{ hashtag.tag }}
+              </span>
+            </ion-label>
+            <ion-label color="primary" *ngIf="tweet.entities !== undefined && tweet.entities.mentions !== undefined">
+              <span *ngFor="let mention of tweet.entities.mentions">
+                @{{ mention.username }}
+              </span>
+            </ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <span [innerText]='tweet.text'></span><br>
+              <ion-label *ngIf="tweet.entities !== undefined && tweet.entities.urls !== undefined" (click)="openTwitterLink(tweet.entities.urls[0].url)"
+                color="primary">{{ tweet.entities.urls[0].url }}</ion-label>
+              <div *ngIf="tweet.attachments !== undefined && tweet.attachments.media_keys !== undefined && media[0] !== undefined">
+                <div *ngFor="let img of media">
+                  <div *ngIf="img.media_key === tweet.attachments.media_keys[0]">
+                    <ion-img class="preview-img"  *ngIf="img.type === 'video'"  [src]="img.preview_image_url" alt=""></ion-img>
+                    <ion-img class="preview-img" *ngIf="img.type === 'photo'"  [src]="img.url" alt=""></ion-img>
+                </div>
+                </div>  
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-infinite-scroll color="primary" (ionInfinite)="eventSearch($event)" distance='1%'>
+        <ion-infinite-scroll-content loadingSpinner="lines">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
 </ion-content>
