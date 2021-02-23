@@ -146,7 +146,7 @@
   <!-- Real Data For Youtube Player -->
   <div *ngIf="!isLoading && segment === 'youtube'">
     <ion-card *ngFor="let video of videos">
-      <ion-img (click)="playVideo(video.id.videoId)" [src]="video.snippet.thumbnails.high.url" alt="ion"></ion-img>
+
       <ion-row class="wrapper">
         <ion-col size=2>
           <ion-avatar item-left>
