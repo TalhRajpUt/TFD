@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -11,17 +12,20 @@ import { FCM } from '@ionic-native/fcm/ngx';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
   login = false;
+  notifications: any = [];
   constructor(public navCtrl: NavController,
               private platform: Platform,
               private fcm: FCM,
+              private storage: Storage,
               private splashScreen: SplashScreen,
               private statusBar: StatusBar) {
-    this.validateLogin();
+    this.initializeApp();
   }
 
   validateLogin(){
-    if (this.login){
+    if (!this.login){
       this.navCtrl.navigateRoot('/login');
     }else{
       this.navCtrl.navigateRoot('/tabs');
@@ -34,31 +38,41 @@ export class AppComponent {
       this.statusBar.overlaysWebView(false);
       this.statusBar.show();
       this.splashScreen.hide();
+      this.fcmNotification();
+      this.validateLogin();
     });
   }
 
   fcmNotification(){
     this.fcm.getToken().then(token => {
       console.log(token);
+      this.storage.set('token', token).then();
+
     });
 
     this.fcm.onNotification().subscribe(data => {
+      this.storage.get('notifications').then((previousNotifications) => {
+        if (previousNotifications === undefined || previousNotifications === null || previousNotifications === ''){
+          this.notifications = [];
+        }else{
+          this.notifications = previousNotifications;
+        }
+      });
+      this.notifications = this.notifications.append(data);
+      this.storage.set('notifications', this.notifications).then(notifications => {
+        console.log('Notification Data', notifications);
+      });
       if (data.wasTapped){
-        console.log('Received in background');
+        this.validateLogin();
       } else {
         console.log('Received in foreground');
       }
     });
-
-    this.fcm.subscribeToTopic('marketing');
 
     this.fcm.hasPermission().then(hasPermission => {
       if (hasPermission) {
         console.log('Has permission!');
       }
     });
-    this.fcm.clearAllNotifications();
-
-    this.fcm.unsubscribeFromTopic('marketing');
   }
 }

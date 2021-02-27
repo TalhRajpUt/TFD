@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'forget',
     loadChildren: () => import('./AuthPages/forget/forget.module').then( m => m.ForgetPageModule)
   },
+  {
+    path: 'update-profile',
+    loadChildren: () => import('./AuthPages/update-profile/update-profile.module').then( m => m.UpdateProfilePageModule)
+  },
 ];
 @NgModule({
   imports: [

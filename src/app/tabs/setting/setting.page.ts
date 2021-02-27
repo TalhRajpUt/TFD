@@ -13,4 +13,10 @@ export class SettingPage implements OnInit {
   ngOnInit() {
   }
 
+
+  // this.fcm.subscribeToTopic('marketing');
+  // this.fcm.clearAllNotifications();
+
+  // this.fcm.unsubscribeFromTopic('marketing');
+
 }

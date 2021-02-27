@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,7 @@ export class ServiceService {
   tweetUrl;
   token = 'Bearer AAAAAAAAAAAAAAAAAAAAALHRMAEAAAAAF4H00EKyrqrDIZFyYDfm2FyRFTg%3D9syNG1vDJ9k1kLxqIMPq1p0AEWWk8qQwrIeDmfkFiehu3r2WLR';
   injuryAnalysisBaskitball = '1362811246928683012';
+  baseUrl = 'http://socialapp.triteckodes.store/api/';
   fantsyBasketball = '1362811051688030216';
   youtubeApiKey = 'AIzaSyCnRPNldC2EgEnGpWJkm4uEwVOSqqjY3qM';
   youtubeUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=';
@@ -16,7 +17,8 @@ export class ServiceService {
   maxCount = 50;
   beatBaskitball = '1362810902601469954';
   reportsBaskitball = '1362810368104407043';
-  constructor(public toastController: ToastController) {
+
+  constructor(public toastController: ToastController, private navCtrl: NavController) {
    }
 
   async presentToast(message, position, duration, color) {
@@ -29,7 +31,7 @@ export class ServiceService {
     toast.present();
   }
 
-  async presentToastWithOptions(header, message, position, color, button1Text, button2Text) {
+  async presentToastWithOptions(header, message, position, color, buttonText, path) {
     const toast = await this.toastController.create({
       header,
       message,
@@ -37,17 +39,10 @@ export class ServiceService {
       color,
       buttons: [
         {
-          side: 'start',
-          icon: 'star',
-          text: button1Text,
+          side: 'end',
+          text: buttonText,
           handler: () => {
-            console.log('Favorite clicked');
-          }
-        }, {
-          text: button2Text,
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
+            this.navCtrl.navigateRoot(path);
           }
         }
       ]

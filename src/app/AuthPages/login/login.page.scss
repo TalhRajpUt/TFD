@@ -1,7 +1,6 @@
 ion-content{
     --background: var(--ion-color-dark);
     .topImage{
-        margin-top: 15%;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -48,8 +47,7 @@ ion-content{
                 }
                 ion-input{
                     color: white;
-                    font-size: x-large;
-                    font-weight: 600;
+                    font-size: larger;
                 }
                 #icon{
                     margin-top: 20px;
