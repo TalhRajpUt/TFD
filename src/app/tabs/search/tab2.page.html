@@ -1,6 +1,6 @@
 <ion-header mode="ios">
-    <ion-toolbar mode="ios">
-      <ion-item Lines=none>
+    <ion-toolbar color="dark" mode="ios">
+      <ion-item color="dark" Lines=none>
         <ion-label>Search by Username</ion-label>
         <ion-toggle color="primary" (ionChange)='trigerEvent($event)' slot="end"></ion-toggle>
       </ion-item>
@@ -8,7 +8,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content color="dark" [fullscreen]="true">
     <div [hidden]='!spinner' class='spinner'>
         <ion-spinner name='lines'></ion-spinner>
     </div>
@@ -18,7 +18,7 @@
       <ion-label>Try something else</ion-label>
     </div>
 
-    <div *ngIf="spinner === false && noResult === false && searchByUsername">
+    <div class="body" *ngIf="spinner === false && noResult === false && searchByUsername">
         <ion-row class="wrapper" *ngFor="let tweet of tweets">
           <ion-col size="2">
             <ion-avatar>
@@ -67,7 +67,7 @@
         </ion-infinite-scroll>
     </div>
 
-    <div *ngIf="spinner === false && noResult === false && !searchByUsername">
+    <div class="body" *ngIf="spinner === false && noResult === false && !searchByUsername">
       <ion-row class="wrapper" *ngFor="let tweet of tweets">
         <ion-col size="2">
           <div *ngFor="let user of users">

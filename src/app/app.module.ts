@@ -7,7 +7,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -23,7 +22,6 @@ import { AppComponent } from './app.component';
     StatusBar,
     FCM,
     InAppBrowser,
-    YoutubeVideoPlayer,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

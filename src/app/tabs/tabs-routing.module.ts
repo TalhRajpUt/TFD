@@ -24,20 +24,28 @@ const routes: Routes = [
         loadChildren: () => import('./setting/setting.module').then(m => m.SettingPageModule)
       },
       {
+        path: 'Injury',
+        loadChildren: () => import('./injury-report/injury-report.module').then(m => m.InjuryReportPageModule)
+      },
+      {
         path: '',
-        redirectTo: '/tabs/setting',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/setting',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   },
   {
     path: 'setting',
     loadChildren: () => import('./setting/setting.module').then( m => m.SettingPageModule)
+  },
+  {
+    path: 'injury-report',
+    loadChildren: () => import('./injury-report/injury-report.module').then( m => m.InjuryReportPageModule)
   }
 ];
 

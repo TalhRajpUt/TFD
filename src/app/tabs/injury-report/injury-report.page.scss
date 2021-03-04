@@ -1,0 +1,19 @@
+
+ion-content{
+    .hyperlink {
+        height: -webkit-fill-available;
+        width: 102%;
+        margin-left: -1%;
+        margin-top: -1%;
+        iframe {
+            height: -webkit-fill-available;
+            width: -webkit-fill-available;
+        }
+    }
+    .loader {
+        position: absolute;
+        width: 100%;
+        height: unset;
+        top: 30%;
+    }
+}

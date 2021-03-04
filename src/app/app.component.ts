@@ -25,7 +25,7 @@ export class AppComponent {
   }
 
   validateLogin(){
-    if (!this.login){
+    if (this.login){
       this.navCtrl.navigateRoot('/login');
     }else{
       this.navCtrl.navigateRoot('/tabs');
@@ -44,6 +44,7 @@ export class AppComponent {
   }
 
   fcmNotification(){
+    console.log('Procedding with FCM');
     this.fcm.getToken().then(token => {
       console.log(token);
       this.storage.set('token', token).then();

@@ -2,6 +2,11 @@ ion-header{
     ion-toolbar{
         padding-top: 5%;
     }
+    ion-toggle {
+        --background-checked: var(--ion-color-blue);
+        --background: var(--ion-color-blue);
+        --handle-background: var(--ion-color-dark);
+    }
 }
 
 ion-content{
@@ -15,6 +20,10 @@ ion-content{
             height: 50px;
             width: 50px;
         }
+    }
+
+    .body{
+        background: var(--ion-color-dark);
     }
 
     .tweet-info {
@@ -31,7 +40,7 @@ ion-content{
     }
 
     .wrapper {
-        border-bottom: 1px solid var(--ion-color-light);
+        border-bottom: 0.2px solid #ffffff33;
     }
 
     .highlight {
