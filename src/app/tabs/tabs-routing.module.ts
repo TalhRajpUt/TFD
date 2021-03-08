@@ -28,6 +28,10 @@ const routes: Routes = [
         loadChildren: () => import('./injury-report/injury-report.module').then(m => m.InjuryReportPageModule)
       },
       {
+        path: 'team',
+        loadChildren: () => import('./team/team.module').then(m => m.TeamPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'

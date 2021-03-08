@@ -3,8 +3,8 @@ import { NavController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { FCM } from '@ionic-native/fcm/ngx';
 import { Storage } from '@ionic/storage';
+import { FCM } from 'plugins/cordova-plugin-fcm-with-dependecy-updated/ionic/ngx/FCM';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,6 @@ import { Storage } from '@ionic/storage';
 })
 export class AppComponent {
 
-  login = false;
   notifications: any = [];
   constructor(public navCtrl: NavController,
               private platform: Platform,
@@ -25,11 +24,13 @@ export class AppComponent {
   }
 
   validateLogin(){
-    if (this.login){
-      this.navCtrl.navigateRoot('/login');
-    }else{
-      this.navCtrl.navigateRoot('/tabs');
-    }
+    this.storage.get('user').then((response) => {
+      if (response === null || response === ''){
+        this.navCtrl.navigateRoot('/login');
+      }else{
+        this.navCtrl.navigateRoot('/tabs');
+      }
+    });
   }
 
   initializeApp() {

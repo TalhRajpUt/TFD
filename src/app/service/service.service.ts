@@ -8,7 +8,7 @@ export class ServiceService {
 
   tweetUrl;
   token = 'Bearer AAAAAAAAAAAAAAAAAAAAALHRMAEAAAAAF4H00EKyrqrDIZFyYDfm2FyRFTg%3D9syNG1vDJ9k1kLxqIMPq1p0AEWWk8qQwrIeDmfkFiehu3r2WLR';
-  baseUrl = 'http://socialapp.triteckodes.store/api/';
+  baseUrl = 'https://socialapp.triteckodes.store/api/';
   youtubeApiKey = 'AIzaSyCnRPNldC2EgEnGpWJkm4uEwVOSqqjY3qM';
   youtubeUrl = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=';
   maxCount = 50;
