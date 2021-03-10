@@ -3,7 +3,6 @@ import { ServiceService } from './../../service/service.service';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-forget',
@@ -12,16 +11,20 @@ import { NgIf } from '@angular/common';
 })
 export class ForgetPage implements OnInit {
 
-  segment = 'update';
+  segment = 'forget';
   spinner = false;
   verifying = false;
   email = '';
-  title = 'Update Password';
+  title = 'Forget Password';
   subTitle = 'Please verify your Account';
   oldPassword = '';
   newPassword = '';
+  apiCode = '';
+  userCode = '';
+  codematched = false;
   newCode = false;
   color = 'primary';
+  color2 = 'primary';
   verify = false;
   apiToken = '';
   constructor(private navCtrl: NavController, private http: HttpClient,
@@ -33,9 +36,41 @@ export class ForgetPage implements OnInit {
   goBack(){
     this.navCtrl.back();
   }
+  validateEmail(){
+    if (this.email === ''){
+      this.service.presentToast('Email is required', 'bottom', 2500, 'warning');
+      return;
+    }
+    this.verifying = true;
+    let code: any = [];
+    const data = new FormData();
+    data.append('email', this.email);
+    this.http.post(this.service.baseUrl + 'forget', data).subscribe((response) => {
+      code = response;
+      if (code.error === true){
+        this.service.presentToast(code.error_data, 'bottom', 2000, 'danger');
+      }else{
+        this.service.presentToast('Verification Code is send at ' + this.email, 'bottom', 2500, 'success');
+        this.apiCode = code.code;
+        this.apiToken = code.api_token;
+        this.color2 = 'success';
+      }
+      this.verifying = false;
+    }, (error) => {
+      this.verifying = false;
+      this.service.presentToast('Something went wrong', 'bottom', 2000, 'danger');
+    });
+  }
 
-  forgetPass(){
-    this.spinner = true;
+  validateCode(){
+    if (this.userCode !== ''){
+      if (this.userCode === this.apiCode){
+        this.codematched = true;
+        this.color = 'success';
+      }else{
+        this.service.presentToast('Incorrect Code', 'bottom', 2000, 'danger');
+      }
+    }
   }
 
   validateLogIn(){
@@ -98,7 +133,9 @@ export class ForgetPage implements OnInit {
 
   async ionViewDidEnter(){
     await this.storage.get('user').then((response) => {
-      if (response !== null || response !== ''){
+      console.log(response);
+      if (response === null || response === ''){
+      }else{
         this.email = response.email;
       }
     });

@@ -29,7 +29,7 @@ export class AppComponent {
       if (response === null || response === ''){
         this.navCtrl.navigateRoot('/login');
       }else{
-        this.navCtrl.navigateRoot('/forget');
+        this.navCtrl.navigateRoot('/tabs');
       }
     });
   }

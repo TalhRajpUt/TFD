@@ -5,11 +5,11 @@
   </div>
 
   <!-- Forget Password -->
-  <div class="topImage" *ngIf="segment === 'forget'" >
+  <div class="topImage2" *ngIf="segment === 'forget'" >
     <img src="../../../assets/forget.svg" alt="">
   </div>
 
-  <div class="form" *ngIf="segment === 'forget'" >
+  <div class="form2" *ngIf="segment === 'forget'" >
     <div id="title">
       <h1>{{title}}</h1>
       <ion-label>{{subTitle}}</ion-label>
@@ -17,31 +17,28 @@
     
     <div id="fields">
       <ion-item>
-        <ion-icon id='icon' slot="start" color="light" name="mail"></ion-icon>
+        <ion-icon id='icon' slot="start" color="light" name="key"></ion-icon>
         <ion-label position="floating">Email</ion-label>
-        <ion-input type=email></ion-input>
+        <ion-input [(ngModel)]='email' placeholder='verify your Email Address' type=email></ion-input>
+        <ion-icon *ngIf="!verifying" (click)="validateEmail()" id='iconEnd' slot=end [color]="color2" name="checkmark-done"></ion-icon>
+        <ion-spinner *ngIf="verifying"  id='iconEnd' color="light" slot=end></ion-spinner>
       </ion-item>
 
-      <ion-item *ngIf="false" >
+      <ion-item [disabled]="apiCode === ''" >
         <ion-icon id='icon' slot="start" color="light" name="key"></ion-icon>
         <ion-label position="floating">Verification Code</ion-label>
-        <ion-input type=tel></ion-input>
+        <ion-input [(ngModel)]='userCode' type=text></ion-input>
+        <ion-icon (click)="validateCode()" id='iconEnd' slot=end [color]="color" name="checkmark-done"></ion-icon>
       </ion-item>
 
-      <ion-item *ngIf="false" >
+      <ion-item [disabled]="!codematched">
         <ion-icon id='icon' slot="start" color="light" name="key"></ion-icon>
         <ion-label position="floating">Passowrd</ion-label>
-        <ion-input type=password></ion-input>
+        <ion-input [(ngModel)]='newPassword' type=password></ion-input>
       </ion-item>
 
-      <ion-item *ngIf="false" >
-        <ion-icon id='icon' slot="start" color="light" name="key"></ion-icon>
-        <ion-label position="floating">Confirm Password</ion-label>
-        <ion-input type=password></ion-input>
-      </ion-item>
-
-      <ion-button color='primary'><ion-spinner *ngIf="false" ></ion-spinner><span>Proceed</span></ion-button>
-      <ion-text>Request a new Code?</ion-text>
+      <ion-button [disabled]='newPassword.length < 6' (click)="updatePassword()" color='primary'><ion-spinner color="light" *ngIf="spinner" ></ion-spinner><span *ngIf="!spinner" >Proceed</span></ion-button>
+      <ion-text *ngIf="verify" >Request a new Code?</ion-text>
     </div>
   </div>
   <ion-label id="label" *ngIf="segment === 'forget'" >Remember your password? <span routerLink='/login' routerDirection='forward'>Sign in</span></ion-label>
