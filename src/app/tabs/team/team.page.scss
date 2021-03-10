@@ -66,7 +66,12 @@ ion-content{
         height: unset;
         top: 30%;
     }
-
+    ion-segment {
+        z-index: 10;
+        background: var(--ion-color-medium);
+        position: sticky;
+        top: 0%;
+    }
 
     ion-card{
         margin: 5px;

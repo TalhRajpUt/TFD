@@ -93,4 +93,9 @@ export class LoginPage implements OnInit {
     });
   }
 
+  forgetPassword(){
+    this.service.segment = 'Forget';
+    this.router.navigateByUrl('/forget');
+  }
+
 }

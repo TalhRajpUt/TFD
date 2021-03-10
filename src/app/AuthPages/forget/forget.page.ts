@@ -11,11 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgetPage implements OnInit {
 
-  segment = 'forget';
+  segment = 'Forget';
   spinner = false;
   verifying = false;
   email = '';
-  title = 'Forget Password';
+  title;
   subTitle = 'Please verify your Account';
   oldPassword = '';
   newPassword = '';
@@ -132,6 +132,7 @@ export class ForgetPage implements OnInit {
   }
 
   async ionViewDidEnter(){
+    this.segment = this.service.segment;
     await this.storage.get('user').then((response) => {
       console.log(response);
       if (response === null || response === ''){

@@ -1,13 +1,28 @@
 <ion-header>
   <ion-toolbar mode=ios>
-    <ion-title>Teams</ion-title>
+    <ion-title>{{title}}</ion-title>
     <ion-icon slot="end" size=large *ngIf="TeamOpen"  (click)="showTeamList()" name="close"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="dark" fullscreen>
+
+  <ion-segment *ngIf="!TeamOpen"  scrollable mode=md [(ngModel)]="segment" (ionChange)='filterList()'>
+    <ion-segment-button value="NBA">
+      <ion-label>NBA</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="MLB">
+      <ion-label>MLB</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="NFL">
+      <ion-label>NFL</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="NHL">
+      <ion-label>NHL</ion-label>
+    </ion-segment-button>
+  </ion-segment>
   <ion-list *ngIf="!TeamOpen">
-    <ion-item *ngFor="let team of filterdList"  (click)="fetchTweets(team.id_str)">
+    <ion-item *ngFor="let team of filterdList"  (click)="fetchTweets(team.id_str, team.name)">
       <ion-avatar slot="start">
         <img [src]="team.user.profile_image_url_https" alt=''>
       </ion-avatar>
@@ -18,7 +33,20 @@
     </ion-item>
   </ion-list>
 
-  <ion-row [hidden]="!isLoading && TeamOpen" class="wrapper" *ngFor="let item of [1,1,1,1,1]">
+    <ion-list *ngIf="isLoading && loadingList">
+      <ion-item *ngFor="let team of [1,2,3,4,5,6,7,8,9,1,1,1,1]">
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h2><ion-skeleton-text style="width: 40%;" animated></ion-skeleton-text></h2>
+          <h3><ion-skeleton-text style="width: 80px" animated></ion-skeleton-text></h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  <div *ngIf="isLoading && loadingTweets">
+  <ion-row class="wrapper" *ngFor="let item of [1,1,1,1,1]">
     <ion-col class="skelton" size="2">
       <ion-avatar>
         <ion-skeleton-text animated></ion-skeleton-text>
@@ -52,6 +80,7 @@
       </ion-row>
     </ion-col>
   </ion-row>
+  </div>
 
   <div  *ngIf="!isLoading && TeamOpen" class='teamDisplay'>
     <ion-row class="wrapper" *ngFor="let tweet of tweets">
@@ -117,6 +146,6 @@
 
   <div class='noTweet' *ngIf="noTweet && TeamOpen">
     <img src="../../../assets/noTweet.svg" alt="">
-    <h1 class="ion-text-center">Nothing Yet<br>Try SOmetime Later</h1>
+    <h1 class="ion-text-center">Nothing Yet<br>Try Sometime Later</h1>
   </div>
 </ion-content>

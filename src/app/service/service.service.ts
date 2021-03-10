@@ -13,6 +13,7 @@ export class ServiceService {
   youtubeApiKey = 'AIzaSyCnRPNldC2EgEnGpWJkm4uEwVOSqqjY3qM';
   youtubeUrl = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=';
   maxCount = 50;
+  segment = 'forget';
 
   // BasketBall Ids
   injuryAnalysisBaskitball = '1362811246928683012';

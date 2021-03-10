@@ -5,13 +5,13 @@
   </div>
 
   <!-- Forget Password -->
-  <div class="topImage2" *ngIf="segment === 'forget'" >
+  <div class="topImage2" *ngIf="segment === 'Forget'" >
     <img src="../../../assets/forget.svg" alt="">
   </div>
 
-  <div class="form2" *ngIf="segment === 'forget'" >
+  <div class="form2" *ngIf="segment === 'Forget'" >
     <div id="title">
-      <h1>{{title}}</h1>
+      <h1>{{title}} Password</h1>
       <ion-label>{{subTitle}}</ion-label>
     </div>
     
@@ -41,14 +41,14 @@
       <ion-text *ngIf="verify" >Request a new Code?</ion-text>
     </div>
   </div>
-  <ion-label id="label" *ngIf="segment === 'forget'" >Remember your password? <span routerLink='/login' routerDirection='forward'>Sign in</span></ion-label>
+  <ion-label id="label" *ngIf="segment === 'Forget'" >Remember your password? <span routerLink='/login' routerDirection='forward'>Sign in</span></ion-label>
 
 
    <!-- Update Password -->
-  <div class="topImage2" *ngIf="segment === 'update'" >
+  <div class="topImage2" *ngIf="segment === 'Update'" >
     <img src="../../../assets/forget.svg" alt="">
   </div>
-  <div class='update' *ngIf="segment === 'update'">
+  <div class='update' *ngIf="segment === 'Update'">
     <div class="form2">
       <div id="title">
         <h1>{{title}}</h1>

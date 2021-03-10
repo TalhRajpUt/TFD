@@ -12,12 +12,17 @@ import { Component, OnInit } from '@angular/core';
 export class TeamPage implements OnInit {
 
   twitterList: any = [];
-  filterdList: any = [];
-  isLoading: boolean;
+  isLoading = false;
+  loadingTweets = false;
   id: string;
+  loadingList = false;
+  segment = 'NBA';
+  filterdList: any = [];
+  title = 'Teams';
   TeamOpen = false;
   tweets: any = [];
-  noTweet: boolean;
+  noTweet = false;
+
   constructor(private http: HTTP, private service: ServiceService, private platform: Platform, private iab: InAppBrowser) {
     this.platform.ready().then(() => {
       this.filterTweets();
@@ -28,29 +33,27 @@ export class TeamPage implements OnInit {
 
   async filterTweets(){
     console.clear();
+    this.isLoading = true;
+    this.loadingList = true;
     await this.http.get('https://api.twitter.com/1.1/lists/list.json?screen_name=tfdtheapp', {}, {
       Authorization: this.service.token
     }).then(async (response) => {
       this.twitterList = response.data;
       this.twitterList = JSON.parse(this.twitterList);
-      this.filterdList = [];
-      await this.twitterList.forEach(list => {
-          if (list.description.includes('beat writers')){
-              this.filterdList = this.filterdList.concat(list);
-          }
-      });
+      await this.filterList();
+      this.isLoading = false;
+      this.loadingList = false;
     }, (error) => {
       console.log(error);
     });
-
-    console.log(this.filterdList);
   }
 
 
-  async fetchTweets(id){
+  async fetchTweets(id, name){
     console.clear();
     this.TeamOpen = true;
     this.isLoading = true;
+    this.title = name;
     await this.http.get('https://api.twitter.com/1.1/lists/statuses.json?list_id=' + id + '&count=100', {}, {
       Authorization: this.service.token
     }).then((response) => {
@@ -78,6 +81,40 @@ export class TeamPage implements OnInit {
 
   showTeamList(){
     this.TeamOpen = false;
+    this.title = 'Team';
+  }
+
+  filterList(){
+    switch (this.segment) {
+      case 'NBA':
+        this.filterListResult('Basketball');
+        break;
+      case 'MLB':
+        this.filterListResult('Baseball');
+        break;
+      case 'NHL':
+        this.filterListResult('Hockey');
+        break;
+      case 'NFL':
+        this.filterListResult('Football');
+        break;
+      default:
+        break;
+    }
+  }
+
+  async filterListResult(matchCase){
+    this.filterdList = [];
+    this.isLoading = true;
+    this.loadingList = true;
+    await this.twitterList.forEach(list => {
+      if (list.description.includes(matchCase)){
+          this.filterdList = this.filterdList.concat(list);
+      }
+    });
+    this.isLoading = false;
+    this.loadingList = false;
+    console.log(this.filterdList[0]);
   }
 
 }

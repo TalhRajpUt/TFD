@@ -124,4 +124,9 @@ export class SettingPage implements OnInit {
       }
     });
   }
+
+  changePassword(){
+    this.service.segment = 'Update';
+    this.router.navigateByUrl('/forget');
+  }
 }

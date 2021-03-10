@@ -25,7 +25,7 @@
       </ion-item>
 
       <ion-button color='primary' (click)="login()" routerDirection='forward'><ion-spinner color="warning" *ngIf="spin" ></ion-spinner><span *ngIf="!spin" >Login</span></ion-button>
-      <ion-text routerLink='/forget' routerDirection='forward'>Forget Password?</ion-text>
+      <ion-text (click)="forgetPassword()">Forget Password?</ion-text>
     </div>
   </div>
 
