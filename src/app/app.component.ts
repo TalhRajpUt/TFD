@@ -17,18 +17,19 @@ export class AppComponent {
   constructor(public navCtrl: NavController,
               private platform: Platform,
               private fcm: FCM,
+              // private router: Router
               private storage: Storage,
               private splashScreen: SplashScreen,
               private statusBar: StatusBar) {
     this.initializeApp();
   }
 
-  validateLogin(){
-    this.storage.get('user').then((response) => {
+  async validateLogin(){
+    await this.storage.get('user').then((response) => {
       if (response === null || response === ''){
         this.navCtrl.navigateRoot('/login');
       }else{
-        this.navCtrl.navigateRoot('/tabs');
+        this.navCtrl.navigateRoot('/forget');
       }
     });
   }
@@ -60,11 +61,12 @@ export class AppComponent {
           this.notifications = previousNotifications;
         }
       });
-      this.notifications = this.notifications.append(data);
+      this.notifications = this.notifications.concat(data);
       this.storage.set('notifications', this.notifications).then(notifications => {
         console.log('Notification Data', notifications);
       });
       if (data.wasTapped){
+        console.log(this.notifications);
         this.validateLogin();
       } else {
         console.log('Received in foreground');

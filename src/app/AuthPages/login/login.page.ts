@@ -1,6 +1,6 @@
+import { Router } from '@angular/router';
 import { ServiceService } from './../../service/service.service';
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 @Component({
@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
   spin = false;
   iconName = 'eye-off';
   userData: any = [];
-  constructor(private http: HttpClient, private service: ServiceService, private navCtrl: NavController,
+  constructor(private http: HttpClient, private service: ServiceService, private router: Router,
               private storage: Storage) { }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
           await this.updateFirebase(this.email);
           this.email = '';
           this.password = '';
-          this.navCtrl.navigateRoot('/tabs');
+          this.router.navigateByUrl('/tabs', {replaceUrl: true});
         }else{
           this.service.presentToast('Your Account is not Verified', 'bottom', 2000, 'warning');
         }

@@ -1,5 +1,6 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { ToastController, NavController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,7 @@ export class ServiceService {
   beatBaseBall = '1365007256966807552';
   channelIdBaseBall = 'PLBUG1anWQC-QhPKtAFzLn8uadUhl4YCx3';
 
-  constructor(public toastController: ToastController, private navCtrl: NavController) {
+  constructor(public toastController: ToastController, private router: Router) {
    }
 
   async presentToast(message, position, duration, color) {
@@ -49,7 +50,8 @@ export class ServiceService {
       message,
       position,
       duration,
-      color
+      color,
+      mode: 'ios'
     });
     toast.present();
   }
@@ -65,7 +67,7 @@ export class ServiceService {
           side: 'end',
           text: buttonText,
           handler: () => {
-            this.navCtrl.navigateRoot(path);
+            this.router.navigateByUrl(path, {replaceUrl: true});
           }
         }
       ]

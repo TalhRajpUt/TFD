@@ -1,16 +1,18 @@
 <ion-content>
 
   <div class='backButton'>
-    <ion-icon routerLink='/login' routerDirection='back' color="primary" name="arrow-back"></ion-icon>
+    <ion-icon (click)="goBack()" color="primary" name="arrow-back"></ion-icon>
   </div>
-  <div class="topImage">
+
+  <!-- Forget Password -->
+  <div class="topImage" *ngIf="segment === 'forget'" >
     <img src="../../../assets/forget.svg" alt="">
   </div>
 
-  <div class="form">
+  <div class="form" *ngIf="segment === 'forget'" >
     <div id="title">
-      <h1>Forget Password</h1>
-      <ion-label>Please verify yourself</ion-label>
+      <h1>{{title}}</h1>
+      <ion-label>{{subTitle}}</ion-label>
     </div>
     
     <div id="fields">
@@ -39,11 +41,46 @@
       </ion-item>
 
       <ion-button color='primary'><ion-spinner *ngIf="false" ></ion-spinner><span>Proceed</span></ion-button>
-      <ion-text *ngIf="true" >Request a new Code?</ion-text>
+      <ion-text>Request a new Code?</ion-text>
     </div>
   </div>
+  <ion-label id="label" *ngIf="segment === 'forget'" >Remember your password? <span routerLink='/login' routerDirection='forward'>Sign in</span></ion-label>
 
 
-  <ion-label id="label">Remember your password? <span routerLink='/login' routerDirection='forward'>Sign in</span></ion-label>
-
+   <!-- Update Password -->
+  <div class="topImage2" *ngIf="segment === 'update'" >
+    <img src="../../../assets/forget.svg" alt="">
+  </div>
+  <div class='update' *ngIf="segment === 'update'">
+    <div class="form2">
+      <div id="title">
+        <h1>{{title}}</h1>
+        <ion-label>{{subTitle}}</ion-label>
+      </div>
+      
+      <div id="fields">
+        <ion-item>
+          <ion-icon id='icon' slot="start" color="light" name="mail"></ion-icon>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input disabled [(ngModel)]='email' type=email></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-icon id='icon' slot="start" color="light" name="key"></ion-icon>
+          <ion-label position="floating">Passowrd</ion-label>
+          <ion-input [(ngModel)]='oldPassword' placeholder='verify your password' type=password></ion-input>
+          <ion-icon *ngIf="!verifying" (click)="validateLogIn()" id='iconEnd' slot=end [color]="color" name="checkmark-done"></ion-icon>
+          <ion-spinner *ngIf="verifying"  id='iconEnd' color="light" slot=end></ion-spinner>
+        </ion-item>
+  
+        <ion-item>
+          <ion-icon id='icon' slot="start" color="light" name="key"></ion-icon>
+          <ion-label position="floating">New Password</ion-label>
+          <ion-input [disabled]='!verify' [(ngModel)]='newPassword' type=password></ion-input>
+        </ion-item>
+  
+        <ion-button [disabled]='!verify || newPassword.length < 6' (click)="updatePassword()" color='primary'><ion-spinner color="light" *ngIf="spinner"  ></ion-spinner><span *ngIf="!spinner" >Proceed</span></ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>

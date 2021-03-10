@@ -1,6 +1,5 @@
 import { ServiceService } from './../../service/service.service';
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-sign-up',
@@ -17,7 +16,7 @@ export class SignUpPage implements OnInit {
   spin = false;
   iconName = 'eye-off';
   userData: any = [];
-  constructor(private http: HttpClient, private service: ServiceService, private navCtrl: NavController) { }
+  constructor(private http: HttpClient, private service: ServiceService) { }
 
   ngOnInit() {
   }

@@ -33,24 +33,16 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/setting',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/tabs/setting',
     pathMatch: 'full'
   },
-  {
-    path: 'setting',
-    loadChildren: () => import('./setting/setting.module').then( m => m.SettingPageModule)
-  },
-  {
-    path: 'injury-report',
-    loadChildren: () => import('./injury-report/injury-report.module').then( m => m.InjuryReportPageModule)
-  }
 ];
 
 @NgModule({
