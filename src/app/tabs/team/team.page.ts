@@ -112,9 +112,14 @@ export class TeamPage implements OnInit {
           this.filterdList = this.filterdList.concat(list);
       }
     });
+    console.clear();
+    console.log('unSorted Array', this.filterdList[0]);
+    this.filterdList = this.filterdList.sort();
+    console.log('Sorted Array', this.filterdList[0]);
+    this.filterdList = this.filterdList.reverse();
+    console.log('Sorted Reverse Array', this.filterdList[0]);
     this.isLoading = false;
     this.loadingList = false;
-    console.log(this.filterdList[0]);
   }
 
 }
