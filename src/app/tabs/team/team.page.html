@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar mode=ios>
+  <ion-toolbar color="dark" mode=ios>
     <ion-title>{{title}}</ion-title>
     <ion-icon slot="end" size=large *ngIf="TeamOpen"  (click)="showTeamList()" name="close"></ion-icon>
   </ion-toolbar>
@@ -22,7 +22,7 @@
     </ion-segment-button>
   </ion-segment>
   <ion-list *ngIf="!TeamOpen">
-    <ion-item *ngFor="let team of filterdList"  (click)="fetchTweets(team.id_str, team.name)">
+    <ion-item color="dark" *ngFor="let team of filterdList"  (click)="fetchTweets(team.id_str, team.name)">
       <ion-avatar slot="start">
         <img [src]="team.user.profile_image_url_https" alt=''>
       </ion-avatar>
