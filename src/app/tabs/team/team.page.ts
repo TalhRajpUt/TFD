@@ -35,11 +35,14 @@ export class TeamPage implements OnInit {
     console.clear();
     this.isLoading = true;
     this.loadingList = true;
-    await this.http.get('https://api.twitter.com/1.1/lists/list.json?screen_name=tfdtheapp', {}, {
+    await this.http.get('https://api.twitter.com/1.1/lists/ownerships.json?screen_name=tfdtheapp&count=1000', {}, {
       Authorization: this.service.token
     }).then(async (response) => {
       this.twitterList = response.data;
       this.twitterList = JSON.parse(this.twitterList);
+      console.log(this.twitterList);
+      this.twitterList = this.twitterList.lists;
+      console.log('Complete Array', this.twitterList);
       await this.filterList();
       this.isLoading = false;
       this.loadingList = false;
@@ -54,7 +57,7 @@ export class TeamPage implements OnInit {
     this.TeamOpen = true;
     this.isLoading = true;
     this.title = name;
-    await this.http.get('https://api.twitter.com/1.1/lists/statuses.json?list_id=' + id + '&count=100', {}, {
+    await this.http.get('https://api.twitter.com/1.1/lists/statuses.json?list_id=' + id + '&count=500', {}, {
       Authorization: this.service.token
     }).then((response) => {
       this.tweets = response.data;
@@ -87,16 +90,16 @@ export class TeamPage implements OnInit {
   filterList(){
     switch (this.segment) {
       case 'NBA':
-        this.filterListResult('Basketball');
+        this.filterListResult('Basketball beat writers');
         break;
       case 'MLB':
-        this.filterListResult('Baseball');
+        this.filterListResult('Baseball beat writers');
         break;
       case 'NHL':
-        this.filterListResult('Hockey');
+        this.filterListResult('Hockey beat writers');
         break;
       case 'NFL':
-        this.filterListResult('Football');
+        this.filterListResult('Football beat writers');
         break;
       default:
         break;
@@ -112,9 +115,11 @@ export class TeamPage implements OnInit {
           this.filterdList = this.filterdList.concat(list);
       }
     });
-    console.clear();
+    console.log('unSorted Array', this.filterdList);
     this.filterdList = this.filterdList.sort();
+    console.log('Sorted Array', this.filterdList);
     this.filterdList = this.filterdList.reverse();
+    console.log('Sorted Reverse Array', this.filterdList);
     this.isLoading = false;
     this.loadingList = false;
   }
