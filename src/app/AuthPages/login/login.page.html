@@ -1,0 +1,35 @@
+<ion-content>
+
+  <div class="topImage">
+    <img src="../../../assets/tweetstorm.svg" alt="">
+  </div>
+
+  <div class="form">
+    <div id="title">
+      <h1>Login</h1>
+      <ion-label>Please Login to Continue</ion-label>
+    </div>
+    
+    <div id="fields">
+      <ion-item>
+        <ion-icon id='icon' slot="start" color="light" name="mail"></ion-icon>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]='email' type=email></ion-input>
+      </ion-item>
+
+      <ion-item> 
+        <ion-icon id='icon' slot="start" color="light" name="key"></ion-icon>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input [(ngModel)]='password' [type]='type'></ion-input>
+        <ion-icon id='eye' (click)="showPassword()" slot="end" color='secondry' [name]="iconName"></ion-icon>
+      </ion-item>
+
+      <ion-button color='primary' (click)="login()" routerDirection='forward'><ion-spinner color="warning" *ngIf="spin" ></ion-spinner><span *ngIf="!spin" >Login</span></ion-button>
+      <ion-text (click)="forgetPassword()">Forget Password?</ion-text>
+    </div>
+  </div>
+
+
+  <ion-label id="label">Don't have an account? <span routerLink='/sign-up' routerDirection='forward'>Sign up</span></ion-label>
+
+</ion-content>
