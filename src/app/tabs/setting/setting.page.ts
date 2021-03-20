@@ -1,3 +1,4 @@
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ServiceService } from './../../service/service.service';
 import { Storage } from '@ionic/storage';
 import { FCM } from 'plugins/cordova-plugin-fcm-with-dependecy-updated/ionic/ngx/FCM';
@@ -14,7 +15,7 @@ export class SettingPage implements OnInit {
   customText = 'On';
   notificationSetting: any = [];
   constructor(private fcm: FCM, private storage: Storage, private service: ServiceService,
-              private router: Router) { }
+              private router: Router, private iab: InAppBrowser) { }
 
   ngOnInit() {
   }
@@ -129,4 +130,19 @@ export class SettingPage implements OnInit {
     this.service.segment = 'Update';
     this.router.navigateByUrl('/forget');
   }
+
+  openLink(url): void{
+    this.iab.create(url, '_blank', {hideurlbar: 'no', fullscreen: 'no', hidespinner: 'no',
+      hidenavigationbuttons: 'yes', zoom: 'no', location: 'no', clearcache: 'yes', toolbar: 'yes', closebuttoncaption: 'Close'});
+  }
+
+  // composeMail(){
+  //   // Compose new mail Code
+  //   if (this.platform.is('ios') || this.platform.is('iphone') || this.platform.is('ipad')){
+  //     this.email.addAlias('thetfdapp@gmail.com', 'com.google.android.gm');
+  //     this.email.open({
+  //       app: 'gmail',
+  //     });
+  //   }
+  // }
 }

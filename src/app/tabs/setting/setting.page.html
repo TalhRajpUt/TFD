@@ -38,13 +38,15 @@
       </ion-item>
       <ion-item-divider></ion-item-divider>
       <ion-list-header>SUPPORT</ion-list-header>
-      <ion-item lines=none>
-        <ion-label slot="start">Call US</ion-label>
+      <ion-item lines=none href="mailto:thetfdapp@gmail.com">
+        <ion-label slot="start">Contact US</ion-label>
+        <ion-icon color="primary" slot="end" name="mail"></ion-icon>
       </ion-item>
-      <ion-item lines=none>
+      <ion-item lines=none (click)="openLink('https://thefantasydoctorsapp.com/privacy-policy/')">
         <ion-label slot="start">Privacy Policy</ion-label>
-      </ion-item>
-      <ion-item lines=none>
+        <ion-icon color="primary" slot="end" name="link"></ion-icon>
+      </ion-item >
+      <ion-item lines=none (click)="openLink('https://thefantasydoctors.com/')">
         <ion-label slot="start">About US</ion-label>
       </ion-item>
     </ion-list>
