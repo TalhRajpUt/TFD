@@ -8,7 +8,7 @@
       <img src="../../../assets/football.png" alt="">
     </ion-avatar>
     <ion-thumbnail>
-      <img src="../../../assets/icon.png" alt="">
+      <img (click)="openLink()" src="../../../assets/icon.png" alt="">
     </ion-thumbnail>
     <ion-avatar (click)="showBaseBall()">
       <img src="../../../assets/baseBall.png" alt="">
@@ -25,14 +25,14 @@
     <ion-segment-button value="news">
       <ion-label>News</ion-label>
     </ion-segment-button>
+    <ion-segment-button value="youtube">
+      <ion-icon size=large color='danger' name='logo-youtube'></ion-icon>
+    </ion-segment-button>
     <ion-segment-button value="Beat">
       <ion-label>Beat Writers</ion-label>
     </ion-segment-button>
     <ion-segment-button value="Fantasy">
       <ion-label>Fantasy</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="youtube">
-      <ion-icon size=large color='danger' name='logo-youtube'></ion-icon>
     </ion-segment-button>
   </ion-segment>
 

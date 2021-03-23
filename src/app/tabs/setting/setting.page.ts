@@ -136,13 +136,4 @@ export class SettingPage implements OnInit {
       hidenavigationbuttons: 'yes', zoom: 'no', location: 'no', clearcache: 'yes', toolbar: 'yes', closebuttoncaption: 'Close'});
   }
 
-  // composeMail(){
-  //   // Compose new mail Code
-  //   if (this.platform.is('ios') || this.platform.is('iphone') || this.platform.is('ipad')){
-  //     this.email.addAlias('thetfdapp@gmail.com', 'com.google.android.gm');
-  //     this.email.open({
-  //       app: 'gmail',
-  //     });
-  //   }
-  // }
 }

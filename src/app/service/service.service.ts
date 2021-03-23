@@ -15,6 +15,8 @@ export class ServiceService {
   maxCount = 50;
   segment = 'forget';
 
+  notifications: any = [];
+
   // BasketBall Ids
   injuryAnalysisBaskitball = '1362811246928683012';
   beatBaskitball = '1362810902601469954';

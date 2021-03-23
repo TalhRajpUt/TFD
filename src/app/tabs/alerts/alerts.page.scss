@@ -1,0 +1,44 @@
+ion-content{
+    #noNotification{
+        height: 100%;
+        display: grid;
+        margin: auto;
+        align-items: center;
+        img{
+            width: 95%;
+            border: 0;
+            border-radius: 20px;
+            margin: auto;
+        }
+    }
+
+    .notifications{
+        width: 95%;
+        margin: auto;
+        margin-top: 10px !important;
+        ion-item{
+            margin-bottom: 10px;
+            border-bottom: 1px solid white;
+        }
+        ion-avatar {
+            height: 50px !important;
+            width: 50px !important;
+        }
+        ion-label{
+            font-size: larger;
+            font-weight: 600;
+        }
+        ion-text{
+            color: darkgray;
+            font-weight: 600;
+        }
+        p{
+            margin: 5px;
+            font-size: large;
+            color: crimson;
+        }
+        img{
+                border-radius: 10px;
+        }
+    }
+}

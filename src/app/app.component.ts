@@ -1,3 +1,4 @@
+import { ServiceService } from './service/service.service';
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
@@ -18,6 +19,7 @@ export class AppComponent {
               private platform: Platform,
               private fcm: FCM,
               // private router: Router
+              private service: ServiceService,
               private storage: Storage,
               private splashScreen: SplashScreen,
               private statusBar: StatusBar) {
@@ -46,6 +48,11 @@ export class AppComponent {
   }
 
   fcmNotification(){
+    this.storage.get('notifications').then(notifications => {
+      console.log('Notification Data', notifications);
+      this.service.notifications = notifications;
+
+    });
     console.log('Procedding with FCM');
     this.fcm.getToken().then(token => {
       console.log(token);
@@ -54,16 +61,15 @@ export class AppComponent {
     });
 
     this.fcm.onNotification().subscribe(data => {
+      console.log(data);
       this.storage.get('notifications').then((previousNotifications) => {
-        if (previousNotifications === undefined || previousNotifications === null || previousNotifications === ''){
-          this.notifications = [];
-        }else{
           this.notifications = previousNotifications;
-        }
       });
       this.notifications = this.notifications.concat(data);
       this.storage.set('notifications', this.notifications).then(notifications => {
         console.log('Notification Data', notifications);
+        this.service.notifications = notifications;
+
       });
       if (data.wasTapped){
         console.log(this.notifications);
@@ -73,12 +79,9 @@ export class AppComponent {
       }
     });
 
-    this.fcm.requestPushPermission();
     this.fcm.hasPermission().then(hasPermission => {
       if (hasPermission) {
-          console.log('permission Granted');
-      }else{
-        console.log('Permission Denied');
+        console.log('Has permission!');
       }
     });
   }
