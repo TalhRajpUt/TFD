@@ -32,6 +32,10 @@ const routes: Routes = [
         loadChildren: () => import('./team/team.module').then(m => m.TeamPageModule)
       },
       {
+        path: 'alerts',
+        loadChildren: () => import('./alerts/alerts.module').then(m => m.AlertsPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
@@ -42,6 +46,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/home',
     pathMatch: 'full'
+  },
+  {
+    path: 'alerts',
+    loadChildren: () => import('./alerts/alerts.module').then( m => m.AlertsPageModule)
   },
 ];
 

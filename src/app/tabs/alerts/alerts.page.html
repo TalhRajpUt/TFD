@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color='dark'>
+    <ion-title mode='ios'>Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+  <div *ngIf="notifications.length < 1"  id="noNotification">
+    <img src="../../../assets/notifications.gif" alt="">
+  </div>
+
+  <div class="notifications">
+    <ion-item color="dark" *ngFor="let alert of notifications" >
+      <ion-col >
+        <ion-row>
+          <ion-label>{{alert.title}}</ion-label>
+          &nbsp;&nbsp;&nbsp;&nbsp; <ion-text *ngIf="alert.topic !== ''">For {{alert.topic}}</ion-text>          
+        </ion-row>
+        <ion-row>
+          <p>{{alert.body}}</p>
+        </ion-row>
+        <ion-row>
+          <img *ngIf="alert.imageUrl !== ''" [src]="alert.imageUrl" alt="">
+        </ion-row>
+      </ion-col>
+    </ion-item>
+  </div>
+</ion-content>
+

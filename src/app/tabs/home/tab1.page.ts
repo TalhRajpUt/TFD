@@ -116,6 +116,11 @@ export class Tab1Page {
     this.isLoading = false;
   }
 
+  openLink(){
+    this.iab.create('https://youtube.com/c/TheFantasyDoctors', '_blank', {hideurlbar: 'no', fullscreen: 'no', hidespinner: 'no',
+      hidenavigationbuttons: 'yes', zoom: 'no', location: 'no', clearcache: 'yes', toolbar: 'yes', closebuttoncaption: 'Close'});
+  }
+
   async loadVideos(event){
     let baseUrl = '';
     this.youtubeLoader = true;
