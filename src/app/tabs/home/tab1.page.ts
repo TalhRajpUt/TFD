@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 import { ServiceService } from './../../service/service.service';
 import { Component } from '@angular/core';
@@ -22,6 +23,7 @@ export class Tab1Page {
   baseball = false;
   hocky = false;
   spinner = false;
+  clientSecert = '';
   youtubeLoader = false;
   id;
   segment = 'Injuries';
@@ -31,7 +33,12 @@ export class Tab1Page {
   chanelId = '';
   noTweet = false;
   constructor(private http: HTTP, private service: ServiceService, private platform: Platform,
-              private iab: InAppBrowser) { }
+              private iab: InAppBrowser, private storage: Storage) {
+                this.storage.get('keys').then((response) => {
+                  console.log(response);
+                  this.clientSecert = response.token;
+                });
+               }
 
   async tweetRequestBasketBall() {
     console.log('Getting Tweets');
@@ -203,5 +210,28 @@ export class Tab1Page {
   ionViewDidEnter(){
    this.segment = 'news';
    this.tweetRequestBasketBall();
+  }
+// Like tweet
+  likeATweet(id){
+    console.clear();
+    const date: any = new Date();
+    const epocValue = Math.round(date / 1000);
+    console.log(epocValue);
+    this.http.post(this.service.likeApi + id, {}, {
+      authorization: 'OAuth oauth_consumer_key="' + this.service.consumerKey + '"&oauth_signature_method="HMAC-SHA1"&oauth_token="'
+      + this.clientSecert + '"&oauth_version="1.0"&oauth_nonce="kYjzVBB8Y0ZFabxSWbWovY3uYSQ2pTgmZeNu2VS4cg"&oauth_signature="tnnArxj06cWHq44gCs1OSKk%2FjLY%3D"&oauth_timestamp=' + epocValue
+    }).then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
+  }
+// Retweet A Tweet
+  retweet(){
+    //
+  }
+  // Comment on a Tweet
+  commentonTweet(){
+    //
   }
 }

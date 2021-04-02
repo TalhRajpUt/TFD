@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content color="dark">
-  <div *ngIf="notifications.length < 1"  id="noNotification">
+  <div *ngIf="notifications !== null || notifications.length < 1"  id="noNotification">
     <img src="../../../assets/notifications.gif" alt="">
   </div>
 

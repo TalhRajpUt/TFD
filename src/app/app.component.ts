@@ -27,7 +27,7 @@ export class AppComponent {
   }
 
   async validateLogin(){
-    await this.storage.get('user').then((response) => {
+    await this.storage.get('keys').then((response) => {
       if (response === null || response === ''){
         this.navCtrl.navigateRoot('/login');
       }else{
@@ -60,9 +60,9 @@ export class AppComponent {
 
     });
 
-    this.fcm.onNotification().subscribe(data => {
+    this.fcm.onNotification().subscribe(async data => {
       console.log(data);
-      this.storage.get('notifications').then((previousNotifications) => {
+      await this.storage.get('notifications').then((previousNotifications) => {
           this.notifications = previousNotifications;
       });
       this.notifications = this.notifications.concat(data);
@@ -72,6 +72,8 @@ export class AppComponent {
 
       });
       if (data.wasTapped){
+        console.log('Received in background');
+        console.log(data);
         console.log(this.notifications);
         this.validateLogin();
       } else {
