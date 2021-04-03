@@ -115,19 +115,19 @@
         </ion-row>
         <ion-row class="ion-justify-content-start">
           <ion-col>
-            <ion-button fill="clear" color="primary" size="small">
+            <ion-button href="https://twitter.com/intent/tweet?in_reply_to={{ tweet.id_str }}" fill="clear" color="primary" size="small">
               <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
               {{ tweet.response }}
             </ion-button>
           </ion-col>
           <ion-col>
-            <ion-button fill="clear" color="primary" size="small">
+            <ion-button href="https://twitter.com/intent/retweet?tweet_id={{ tweet.id_str }}" fill="clear" color="primary" size="small">
               <ion-icon name="repeat-outline" slot="start"></ion-icon>
               {{ tweet.retweet_count }}
             </ion-button>
           </ion-col>
           <ion-col>
-            <ion-button fill="clear" color="primary" size="small">
+            <ion-button href="https://twitter.com/intent/like?tweet_id={{ tweet.id_str }}" fill="clear" color="primary" size="small">
               <ion-icon name="heart-outline" slot="start"></ion-icon>
               {{ tweet.favorite_count }}
             </ion-button>
