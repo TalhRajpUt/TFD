@@ -1,3 +1,5 @@
+import { Platform } from '@ionic/angular';
+import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ServiceService } from './../../service/service.service';
 import { Storage } from '@ionic/storage';
@@ -15,7 +17,8 @@ export class SettingPage implements OnInit {
   customText = 'On';
   notificationSetting: any = [];
   constructor(private fcm: FCM, private storage: Storage, private service: ServiceService,
-              private router: Router, private iab: InAppBrowser) { }
+              private router: Router, private iab: InAppBrowser, private twitter: TwitterConnect,
+              private platform: Platform) { }
 
   ngOnInit() {
   }
@@ -23,7 +26,13 @@ export class SettingPage implements OnInit {
   async logOut(){
     await this.storage.clear();
     await this.disableNotifications();
-    this.router.navigateByUrl('/login', { replaceUrl: true});
+    this.twitter.logout().then((response) => {
+      console.log('LogOut', response);
+    }, (error) => {
+      console.log(error);
+    });
+    // tslint:disable-next-line:no-string-literal
+    navigator['app'].exitApp();
   }
 
   async disableNotifications(){

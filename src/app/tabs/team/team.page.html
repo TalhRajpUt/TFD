@@ -1,3 +1,10 @@
+<ion-header>
+  <ion-toolbar color="dark" mode=ios>
+    <ion-title>{{title}}</ion-title>
+    <ion-icon slot="end" size=large *ngIf="TeamOpen"  (click)="showTeamList()" name="close"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content color="dark" fullscreen>
 
   <ion-segment *ngIf="!TeamOpen"  scrollable mode=md [(ngModel)]="segment" (ionChange)='filterList()'>
