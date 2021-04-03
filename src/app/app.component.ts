@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 import { FCM } from 'plugins/cordova-plugin-fcm-with-dependecy-updated/ionic/ngx/FCM';
+import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
   constructor(public navCtrl: NavController,
               private platform: Platform,
               private fcm: FCM,
+              private twitter: TwitterConnect,
               // private router: Router
               private service: ServiceService,
               private storage: Storage,
@@ -27,12 +29,30 @@ export class AppComponent {
   }
 
   async validateLogin(){
-    await this.storage.get('keys').then((response) => {
+    await this.storage.get('keys').then(async (response) => {
       if (response === null || response === ''){
-        this.navCtrl.navigateRoot('/login');
+        await this.twitterLogin();
       }else{
         this.navCtrl.navigateRoot('/tabs');
       }
+    });
+  }
+
+  twitterLogin(){
+    this.twitter.login().then((detail) => {
+      console.clear();
+      console.log('Success');
+      console.log(detail);
+      this.storage.set('keys', detail).then();
+      this.twitter.showUser().then((userProfile) => {
+        console.log(userProfile);
+        this.storage.set('profile', userProfile).then();
+        this.navCtrl.navigateRoot('/tabs');
+      });
+    }, (error) => {
+      console.clear();
+      console.log('Error');
+      console.log(error);
     });
   }
 

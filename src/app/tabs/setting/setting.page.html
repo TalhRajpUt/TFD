@@ -12,7 +12,7 @@
     <ion-list >
       <ion-list-header>ACCOUNT</ion-list-header>
       <ion-item lines=none>
-        <ion-label slot="start">Notification</ion-label>
+        <ion-label slot="start">Mute Notification</ion-label>
           <ion-toggle (ionChange)='allNotifications($event)' [checked]='notificationSetting.ALL' mode='ios' slot='end'></ion-toggle>
       </ion-item>
       <ion-item (click)="changePassword()" lines=none>
@@ -21,19 +21,19 @@
       <ion-item-divider ></ion-item-divider>
       <ion-list-header>Other Notification</ion-list-header>
       <ion-item lines=none>
-        <ion-label slot="start">NBA Alerts</ion-label>
+        <ion-label slot="start">Mute NBA Alerts</ion-label>
           <ion-toggle (ionChange)='nbaAlerts($event)' [checked]="notificationSetting.NBA" mode='ios' slot='end'></ion-toggle>
       </ion-item>
       <ion-item lines=none>
-        <ion-label slot="start">NFL Alerts</ion-label>
+        <ion-label slot="start">Mute NFL Alerts</ion-label>
           <ion-toggle (ionChange)='nflAlerts($event)' [checked]="notificationSetting.NFL" mode='ios' slot='end'></ion-toggle>
       </ion-item>
       <ion-item lines=none>
-        <ion-label slot="start">MLB Alerts</ion-label>
+        <ion-label slot="start">Mute MLB Alerts</ion-label>
           <ion-toggle (ionChange)='mlbAlerts($event)' [checked]="notificationSetting.MLB"  mode='ios' slot='end'></ion-toggle>
       </ion-item>
       <ion-item lines=none>
-        <ion-label slot="start">NHL Alerts</ion-label>
+        <ion-label slot="start">Mute NHL Alerts</ion-label>
           <ion-toggle (ionChange)='nhlAlerts($event)' [checked]="notificationSetting.NHL"  mode='ios' slot='end'></ion-toggle>
       </ion-item>
       <ion-item-divider></ion-item-divider>

@@ -1,24 +1,24 @@
 <ion-content color="dark" [fullscreen]="true" scrollEvents="true">
 
   <div class='header'>
-    <ion-avatar (click)="showBasketBall()">
+    <ion-avatar [ngStyle]="{'border': activeBasketBall ? '#f2321c 3px solid' : 'none' }" (click)="showBasketBall()">
       <img src="../../../assets/basketBall.png" alt="">
     </ion-avatar>
-    <ion-avatar (click)="showFootBall()">
+    <ion-avatar [ngStyle]="{'border': activeFootBall ? '#f2321c 3px solid' : 'none' }" (click)="showFootBall()">
       <img src="../../../assets/football.png" alt="">
     </ion-avatar>
     <ion-thumbnail>
       <img (click)="openLink()" src="../../../assets/icon.png" alt="">
     </ion-thumbnail>
-    <ion-avatar (click)="showBaseBall()">
+    <ion-avatar [ngStyle]="{'border': activeBaseBall ? '#f2321c 3px solid' : 'none' }" (click)="showBaseBall()">
       <img src="../../../assets/baseBall.png" alt="">
     </ion-avatar>
-    <ion-avatar (click)="showHocky()">
+    <ion-avatar [ngStyle]="{'border': activeHockey ? '#f2321c 3px solid' : 'none' }" (click)="showHocky()">
       <img src="../../../assets/injuryReport.png" alt="">
     </ion-avatar>
 
 </div>
-  <ion-segment scrollable mode=md [(ngModel)]="segment" (ionChange)='tweetRequestBasketBall()'>
+  <ion-segment *ngIf="!this.switchToMasterList"  scrollable mode=md [(ngModel)]="segment" (ionChange)='tweetRequestBasketBall()'>
     <ion-segment-button value="Injuries">
       <ion-label>Injuries</ion-label>
     </ion-segment-button>
@@ -76,7 +76,7 @@
   <div class="tweets" *ngIf="!isLoading && segment !== 'youtube'">
     <ion-row class="wrapper" *ngFor="let tweet of tweets">
       <ion-col size="2">
-        <ion-avatar>
+        <ion-avatar id="avatar">
           <ion-img [src]="tweet.user.profile_image_url_https" alt=""></ion-img>
         </ion-avatar>
       </ion-col>
@@ -164,6 +164,6 @@
 
   <div class='noTweet' *ngIf="noTweet" >
     <img src="../../../assets/noTweet.svg" alt="">
-    <h1 class="ion-text-center">Nothing Yet<br>Try SOmetime Later</h1>
+    <h1 class="ion-text-center">Nothing Yet<br>Try Sometime Later</h1>
   </div>
 </ion-content>
