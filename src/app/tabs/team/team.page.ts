@@ -124,4 +124,5 @@ export class TeamPage implements OnInit {
     this.loadingList = false;
   }
 
+
 }

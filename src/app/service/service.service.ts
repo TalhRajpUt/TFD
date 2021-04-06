@@ -10,6 +10,10 @@ export class ServiceService {
   tweetUrl;
   token = 'Bearer AAAAAAAAAAAAAAAAAAAAALHRMAEAAAAAF4H00EKyrqrDIZFyYDfm2FyRFTg%3D9syNG1vDJ9k1kLxqIMPq1p0AEWWk8qQwrIeDmfkFiehu3r2WLR';
   baseUrl = 'https://socialapp.triteckodes.store/api/';
+  likeToken = 'OAuth oauth_consumer_key=';
+  consumerKey = 'eO8AsyadUW8QOXLsDJ9u3HKiK';
+  outhToken = '';
+  likeApi = 'https://api.twitter.com/1.1/favorites/create.json?id=';
   youtubeApiKey = 'AIzaSyCnRPNldC2EgEnGpWJkm4uEwVOSqqjY3qM';
   youtubeUrl = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=';
   maxCount = 50;

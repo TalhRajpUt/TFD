@@ -13,6 +13,8 @@ ion-content {
             width: 20vw;
             --border-radius : 20px;
         }
+        ion-avatar{
+            padding: 2px 0px 0px 1px;        }
     }
 
     ion-segment {
@@ -24,6 +26,10 @@ ion-content {
 
     ion-segment-button {
         text-transform: none;
+        font-size: 12px;
+        font-weight: 600;
+        width: 18%;
+        margin: 0px -10px;
     }
 
     .tweets{
@@ -70,6 +76,10 @@ ion-content {
     ion-avatar {
         height: 50px !important;
         width: 50px !important;
+    }
+
+    #avatar{
+        border: white 3px solid;
     }
 
     .hyperlink {

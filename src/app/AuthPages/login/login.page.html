@@ -17,7 +17,7 @@
         <ion-input [(ngModel)]='email' type=email></ion-input>
       </ion-item>
 
-      <ion-item> 
+      <ion-item>
         <ion-icon id='icon' slot="start" color="light" name="key"></ion-icon>
         <ion-label position="floating">Password</ion-label>
         <ion-input [(ngModel)]='password' [type]='type'></ion-input>
@@ -29,7 +29,7 @@
     </div>
   </div>
 
-
+  <ion-button (click)="twitterLogin()">Login with Twitter</ion-button>
   <ion-label id="label">Don't have an account? <span routerLink='/sign-up' routerDirection='forward'>Sign up</span></ion-label>
 
 </ion-content>

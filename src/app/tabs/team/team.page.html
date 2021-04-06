@@ -33,7 +33,7 @@
     </ion-item>
   </ion-list>
 
-    <ion-list color="dark" *ngIf="isLoading && loadingList">
+    <ion-list *ngIf="isLoading && loadingList">
       <ion-item *ngFor="let team of [1,2,3,4,5,6,7,8,9,1,1,1,1]">
         <ion-avatar slot="start">
           <ion-skeleton-text animated></ion-skeleton-text>
@@ -122,19 +122,19 @@
         </ion-row>
         <ion-row class="ion-justify-content-start">
           <ion-col>
-            <ion-button fill="clear" color="primary" size="small">
+            <ion-button href="https://twitter.com/intent/tweet?in_reply_to={{ tweet.id_str }}" fill="clear" color="primary" size="small">
               <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
               {{ tweet.response }}
             </ion-button>
           </ion-col>
           <ion-col>
-            <ion-button fill="clear" color="primary" size="small">
+            <ion-button href="https://twitter.com/intent/retweet?tweet_id={{ tweet.id_str }}" fill="clear" color="primary" size="small">
               <ion-icon name="repeat-outline" slot="start"></ion-icon>
               {{ tweet.retweet_count }}
             </ion-button>
           </ion-col>
           <ion-col>
-            <ion-button fill="clear" color="primary" size="small">
+            <ion-button href="https://twitter.com/intent/like?tweet_id={{ tweet.id_str }}" fill="clear" color="primary" size="small">
               <ion-icon name="heart-outline" slot="start"></ion-icon>
               {{ tweet.favorite_count }}
             </ion-button>

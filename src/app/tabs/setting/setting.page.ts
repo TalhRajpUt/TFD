@@ -1,3 +1,5 @@
+import { Platform } from '@ionic/angular';
+import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ServiceService } from './../../service/service.service';
 import { Storage } from '@ionic/storage';
@@ -15,7 +17,8 @@ export class SettingPage implements OnInit {
   customText = 'On';
   notificationSetting: any = [];
   constructor(private fcm: FCM, private storage: Storage, private service: ServiceService,
-              private router: Router, private iab: InAppBrowser) { }
+              private router: Router, private iab: InAppBrowser, private twitter: TwitterConnect,
+              private platform: Platform) { }
 
   ngOnInit() {
   }
@@ -23,7 +26,13 @@ export class SettingPage implements OnInit {
   async logOut(){
     await this.storage.clear();
     await this.disableNotifications();
-    this.router.navigateByUrl('/login', { replaceUrl: true});
+    this.twitter.logout().then((response) => {
+      console.log('LogOut', response);
+    }, (error) => {
+      console.log(error);
+    });
+    // tslint:disable-next-line:no-string-literal
+    navigator['app'].exitApp();
   }
 
   async disableNotifications(){
@@ -38,10 +47,10 @@ export class SettingPage implements OnInit {
     console.log(value.detail);
     if (value.detail.checked === false){
       this.fcm.unsubscribeFromTopic('MLB');
-      this.service.presentToast('MLB Alerts are Disabled', 'top', 2000, 'warning');
+      // this.service.presentToast('MLB Alerts are Disabled', 'top', 2000, 'warning');
     }else{
       this.fcm.subscribeToTopic('MLB');
-      this.service.presentToast('MLB Alerts are Enabled', 'top', 2000, 'success');
+      // this.service.presentToast('MLB Alerts are Enabled', 'top', 2000, 'success');
     }
     this.notificationSetting.MLB = value.detail.checked;
     await this.storage.set('notification', this.notificationSetting).then((response) => {
@@ -53,10 +62,10 @@ export class SettingPage implements OnInit {
     console.log(value.detail);
     if (value.detail.checked === false){
       this.fcm.unsubscribeFromTopic('NBA');
-      this.service.presentToast('NBA Alerts are disabled', 'top', 2000, 'warning');
+      // this.service.presentToast('NBA Alerts are disabled', 'top', 2000, 'warning');
     }else{
       this.fcm.subscribeToTopic('NBA');
-      this.service.presentToast('NBA Alerts are Enabled', 'top', 2000, 'success');
+      // this.service.presentToast('NBA Alerts are Enabled', 'top', 2000, 'success');
     }
     this.notificationSetting.NBA = value.detail.checked;
     await this.storage.set('notification', this.notificationSetting).then((response) => {
@@ -68,10 +77,10 @@ export class SettingPage implements OnInit {
     console.log(value.detail);
     if (value.detail.checked === false){
       this.fcm.unsubscribeFromTopic('NFL');
-      this.service.presentToast('NFL Alerts are disabled', 'top', 2000, 'warning');
+      // this.service.presentToast('NFL Alerts are disabled', 'top', 2000, 'warning');
     }else{
       this.fcm.subscribeToTopic('NFL');
-      this.service.presentToast('NFL Alerts are Enabled', 'top', 2000, 'success');
+      // this.service.presentToast('NFL Alerts are Enabled', 'top', 2000, 'success');
     }
     this.notificationSetting.NFL = value.detail.checked;
     await this.storage.set('notification', this.notificationSetting).then((response) => {
@@ -83,10 +92,10 @@ export class SettingPage implements OnInit {
     console.log(value.detail);
     if (value.detail.checked === false){
       this.fcm.unsubscribeFromTopic('NHL');
-      this.service.presentToast('NHL Alerts are disabled', 'top', 2000, 'warning');
+      // this.service.presentToast('NHL Alerts are disabled', 'top', 2000, 'warning');
     }else{
       this.fcm.subscribeToTopic('NHL');
-      this.service.presentToast('NHL Alerts are Enabled', 'top', 2000, 'success');
+      // this.service.presentToast('NHL Alerts are Enabled', 'top', 2000, 'success');
     }
     this.notificationSetting.NHL = value.detail.checked;
     await this.storage.set('notification', this.notificationSetting).then((response) => {
@@ -98,10 +107,10 @@ export class SettingPage implements OnInit {
     console.log(value.detail);
     if (value.detail.checked === false){
       this.fcm.unsubscribeFromTopic('ALL');
-      this.service.presentToast('Alerts are disabled', 'top', 2000, 'warning');
+      // this.service.presentToast('Alerts are disabled', 'top', 2000, 'warning');
     }else{
       this.fcm.subscribeToTopic('ALL');
-      this.service.presentToast('Alerts are Enabled', 'top', 2000, 'success');
+      // this.service.presentToast('Alerts are Enabled', 'top', 2000, 'success');
     }
     this.notificationSetting.ALL = value.detail.checked;
     await this.storage.set('notification', this.notificationSetting).then((response) => {
@@ -135,5 +144,4 @@ export class SettingPage implements OnInit {
     this.iab.create(url, '_blank', {hideurlbar: 'no', fullscreen: 'no', hidespinner: 'no',
       hidenavigationbuttons: 'yes', zoom: 'no', location: 'no', clearcache: 'yes', toolbar: 'yes', closebuttoncaption: 'Close'});
   }
-
 }
