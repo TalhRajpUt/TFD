@@ -9,7 +9,7 @@ export class ServiceService {
 
   tweetUrl;
   token = 'Bearer AAAAAAAAAAAAAAAAAAAAALHRMAEAAAAAF4H00EKyrqrDIZFyYDfm2FyRFTg%3D9syNG1vDJ9k1kLxqIMPq1p0AEWWk8qQwrIeDmfkFiehu3r2WLR';
-  baseUrl = 'https://socialapp.triteckodes.store/api/';
+  baseUrl = 'https://app.thefantasydoctorsapp.com/api/';
   likeToken = 'OAuth oauth_consumer_key=';
   consumerKey = 'eO8AsyadUW8QOXLsDJ9u3HKiK';
   outhToken = '';

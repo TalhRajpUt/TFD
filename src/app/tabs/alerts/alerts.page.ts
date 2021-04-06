@@ -1,7 +1,7 @@
 import { Platform } from '@ionic/angular';
 import { ServiceService } from './../../service/service.service';
 import { Component, OnInit } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-alerts',
   templateUrl: './alerts.page.html',
@@ -10,23 +10,25 @@ import { Component, OnInit } from '@angular/core';
 export class AlertsPage implements OnInit {
 
   notifications: any = [];
-  constructor(private service: ServiceService, private platform: Platform) {
-    this.platform.ready().then(() => {
-      this.notifications = this.service.notifications;
-      console.log(this.notifications);
-      this.notifications = this.notifications.reverse();
-    });
-  }
+  constructor(private service: ServiceService, private platform: Platform, private http: HttpClient) { }
 
   ngOnInit() { }
 
   ionViewDidEnter(){
-    this.loadNotifications();
+    this.fetchNotifications();
   }
 
-  loadNotifications(){
-    this.notifications = this.service.notifications;
-    this.notifications = this.notifications.reverse();
+  fetchNotifications(){
+    this.http.post(this.service.baseUrl + 'notifications', {}).subscribe(async (response) => {
+      this.notifications = response;
+      if (this.notifications.error === false){
+        this.notifications = this.notifications.notifications.reverse();
+        console.log(this.notifications);
+      }
+    }, (error) => {
+      console.log(error);
+      return false;
+    });
   }
 
 }
