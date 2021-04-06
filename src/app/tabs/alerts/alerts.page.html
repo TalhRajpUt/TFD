@@ -5,25 +5,34 @@
 </ion-header>
 
 <ion-content color="dark">
-  <div *ngIf="notifications !== null || notifications.length < 1"  id="noNotification">
+  <div *ngIf="notifications.length === 0"  id="noNotification">
     <img src="../../../assets/notifications.gif" alt="">
   </div>
 
-  <div class="notifications">
+  <div class="notifications" *ngIf="notifications.length > 0">
+    <!-- <ion-card mode=ios *ngFor="let alert of notifications">
+      <img *ngIf="alert.image !== ''" [src]="alert.image" alt="">
+        <ion-card-header>
+          <ion-card-subtitle>For {{alert.channel}}</ion-card-subtitle>
+          <ion-card-title>{{alert.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{alert.body}}
+        </ion-card-content>
+    </ion-card> -->
     <ion-item color="dark" *ngFor="let alert of notifications" >
       <ion-col >
         <ion-row>
           <ion-label>{{alert.title}}</ion-label>
-          &nbsp;&nbsp;&nbsp;&nbsp; <ion-text *ngIf="alert.topic !== ''">For {{alert.topic}}</ion-text>          
+          &nbsp;&nbsp;&nbsp;&nbsp; <ion-text>For {{alert.channel}}</ion-text>          
         </ion-row>
         <ion-row>
           <p>{{alert.body}}</p>
         </ion-row>
         <ion-row>
-          <img *ngIf="alert.imageUrl !== ''" [src]="alert.imageUrl" alt="">
+          <img *ngIf="alert.image !== 'https://app.thefantasydoctorsapp.com/'" [src]="alert.image" alt="">
         </ion-row>
       </ion-col>
     </ion-item>
   </div>
 </ion-content>
-

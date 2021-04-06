@@ -1,3 +1,4 @@
+import { AlertsPage } from './tabs/alerts/alerts.page';
 import { ServiceService } from './service/service.service';
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
@@ -23,6 +24,7 @@ export class AppComponent {
               // private router: Router
               private service: ServiceService,
               private storage: Storage,
+              private alert: AlertsPage,
               private splashScreen: SplashScreen,
               private statusBar: StatusBar) {
     this.initializeApp();
@@ -67,13 +69,7 @@ export class AppComponent {
     });
   }
 
-  fcmNotification(){
-    this.storage.get('notifications').then(notifications => {
-      console.log('Notification Data', notifications);
-      this.service.notifications = notifications;
-
-    });
-    console.log('Procedding with FCM');
+  async fcmNotification(){
     this.fcm.getToken().then(token => {
       console.log(token);
       this.storage.set('token', token).then();
@@ -81,26 +77,24 @@ export class AppComponent {
     });
 
     this.fcm.onNotification().subscribe(async data => {
-      console.log(data);
-      await this.storage.get('notifications').then((previousNotifications) => {
-          this.notifications = previousNotifications;
-      });
-      this.notifications = this.notifications.concat(data);
-      this.storage.set('notifications', this.notifications).then(notifications => {
-        console.log('Notification Data', notifications);
-        this.service.notifications = notifications;
-
-      });
       if (data.wasTapped){
-        console.log('Received in background');
-        console.log(data);
-        console.log(this.notifications);
         this.validateLogin();
       } else {
+        this.alert.fetchNotifications();
         console.log('Received in foreground');
       }
     });
 
+    await this.storage.get('notification').then((response) => {
+      if (response === null || response === ''){
+        this.fcm.subscribeToTopic('MLB');
+        this.fcm.subscribeToTopic('NBA');
+        this.fcm.subscribeToTopic('NHL');
+        this.fcm.subscribeToTopic('NFL');
+        this.fcm.subscribeToTopic('ALL');
+        console.log('SuccessfulySubcibed');
+      }
+    });
     this.fcm.hasPermission().then(hasPermission => {
       if (hasPermission) {
         console.log('Has permission!');

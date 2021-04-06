@@ -1,3 +1,4 @@
+import { AlertsPage } from './tabs/alerts/alerts.page';
 import { FCM } from 'plugins/cordova-plugin-fcm-with-dependecy-updated/ionic/ngx/FCM';
 import { HTTP } from '@ionic-native/http/ngx';
 import { NgModule } from '@angular/core';
@@ -22,6 +23,7 @@ import { AppComponent } from './app.component';
     HTTP,
     StatusBar,
     FCM,
+    AlertsPage,
     TwitterConnect,
     InAppBrowser,
     SplashScreen,
