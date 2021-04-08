@@ -1,4 +1,4 @@
-import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
+// import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { Router } from '@angular/router';
 import { ServiceService } from './../../service/service.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
   iconName = 'eye-off';
   userData: any = [];
   constructor(private http: HttpClient, private service: ServiceService, private router: Router,
-              private storage: Storage, private twitter: TwitterConnect) { }
+              private storage: Storage) { }
 
   ngOnInit() {
   }
@@ -99,19 +99,19 @@ export class LoginPage implements OnInit {
     this.router.navigateByUrl('/forget');
   }
 
-  twitterLogin(){
-    this.twitter.login().then((detail) => {
-      console.clear();
-      console.log(detail);
-      this.storage.set('keys', detail).then();
-      this.twitter.showUser().then((userProfile) => {
-        console.log(userProfile);
-        this.router.navigateByUrl('/tabs', {replaceUrl: true});
-      });
-    }, (error) => {
-      console.clear();
-      console.log(error);
-    });
-  }
+  // twitterLogin(){
+  //   this.twitter.login().then((detail) => {
+  //     console.clear();
+  //     console.log(detail);
+  //     this.storage.set('keys', detail).then();
+  //     this.twitter.showUser().then((userProfile) => {
+  //       console.log(userProfile);
+  //       this.router.navigateByUrl('/tabs', {replaceUrl: true});
+  //     });
+  //   }, (error) => {
+  //     console.clear();
+  //     console.log(error);
+  //   });
+  // }
 
 }
