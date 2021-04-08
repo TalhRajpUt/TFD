@@ -18,21 +18,21 @@
     </ion-avatar>
 
 </div>
-  <ion-segment *ngIf="!this.switchToMasterList"  scrollable mode=md [(ngModel)]="segment" (ionChange)='tweetRequestBasketBall()'>
+  <ion-segment color="primary" *ngIf="!this.switchToMasterList"  scrollable mode=md [(ngModel)]="segment" (ionChange)='tweetRequestBasketBall()'>
     <ion-segment-button value="Injuries">
-      <ion-label>Injuries</ion-label>
+      <ion-label color="dark">Injuries</ion-label>
     </ion-segment-button>
     <ion-segment-button value="news">
-      <ion-label>News</ion-label>
+      <ion-label color="dark">News</ion-label>
     </ion-segment-button>
     <ion-segment-button value="youtube">
       <ion-icon size=large color='danger' name='logo-youtube'></ion-icon>
     </ion-segment-button>
     <ion-segment-button value="Beat">
-      <ion-label>Beat Writers</ion-label>
+      <ion-label color="dark">Beat Writers</ion-label>
     </ion-segment-button>
     <ion-segment-button value="Fantasy">
-      <ion-label>Fantasy</ion-label>
+      <ion-label color="dark">Fantasy</ion-label>
     </ion-segment-button>
   </ion-segment>
 

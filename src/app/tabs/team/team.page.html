@@ -9,16 +9,16 @@
 
   <ion-segment *ngIf="!TeamOpen"  scrollable mode=md [(ngModel)]="segment" (ionChange)='filterList()'>
     <ion-segment-button value="NBA">
-      <ion-label>NBA</ion-label>
+      <ion-label color="dark">NBA</ion-label>
     </ion-segment-button>
     <ion-segment-button value="MLB">
-      <ion-label>MLB</ion-label>
+      <ion-label color="dark">MLB</ion-label>
     </ion-segment-button>
     <ion-segment-button value="NFL">
-      <ion-label>NFL</ion-label>
+      <ion-label color="dark">NFL</ion-label>
     </ion-segment-button>
     <ion-segment-button value="NHL">
-      <ion-label>NHL</ion-label>
+      <ion-label color="dark">NHL</ion-label>
     </ion-segment-button>
   </ion-segment>
   <ion-list *ngIf="!TeamOpen">

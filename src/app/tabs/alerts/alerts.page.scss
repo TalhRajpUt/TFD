@@ -17,6 +17,7 @@ ion-content{
         margin: auto;
         margin-top: 10px !important;
         ion-item{
+            --background: var(--ion-color-dark);
             margin-bottom: 10px;
             border-bottom: 1px solid white;
         }
@@ -40,5 +41,12 @@ ion-content{
         img{
                 border-radius: 10px;
         }
+    }
+}
+
+ion-header{
+
+    ion-toolbar{
+        --background: var(--ion-color-dark);
     }
 }
