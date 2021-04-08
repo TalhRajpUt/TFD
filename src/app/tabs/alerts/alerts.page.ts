@@ -1,3 +1,4 @@
+import { FCM } from 'plugins/cordova-plugin-fcm-with-dependecy-updated/ionic/ngx/FCM';
 import { Platform } from '@ionic/angular';
 import { ServiceService } from './../../service/service.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,8 @@ import { HttpClient } from '@angular/common/http';
 export class AlertsPage implements OnInit {
 
   notifications: any = [];
-  constructor(private service: ServiceService, private platform: Platform, private http: HttpClient) { }
+  constructor(private service: ServiceService, private platform: Platform, private http: HttpClient,
+              private fcm: FCM) { }
 
   ngOnInit() { }
 

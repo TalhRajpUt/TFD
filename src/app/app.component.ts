@@ -1,4 +1,3 @@
-import { AlertsPage } from './tabs/alerts/alerts.page';
 import { ServiceService } from './service/service.service';
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
@@ -24,7 +23,6 @@ export class AppComponent {
               // private router: Router
               private service: ServiceService,
               private storage: Storage,
-              private alert: AlertsPage,
               private splashScreen: SplashScreen,
               private statusBar: StatusBar) {
     this.initializeApp();
@@ -77,12 +75,18 @@ export class AppComponent {
 
     });
 
+    this.fcm.hasPermission().then((response) => {
+      if (!response){
+        this.fcm.requestPushPermission().then();
+      }
+    });
+
     this.fcm.onNotification().subscribe(async data => {
+      console.log('Notification Recived');
       if (data.wasTapped){
         this.validateLogin();
       } else {
-        this.alert.fetchNotifications();
-        console.log('Received in foreground');
+        this.service.presentToast('You have new Notification', 'top', 2000, 'dark');
       }
     });
 
