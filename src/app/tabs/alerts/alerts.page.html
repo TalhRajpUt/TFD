@@ -22,15 +22,17 @@
     </ion-card> -->
     <ion-item color="dark" *ngFor="let alert of notifications" >
       <ion-col >
+        <ion-row id="titleRow">
+          <h2>{{alert.title}}</h2><br>        
+        </ion-row>
         <ion-row>
-          <ion-label>{{alert.title}}</ion-label>
-          &nbsp;&nbsp;&nbsp;&nbsp; <ion-text>For {{alert.channel}}</ion-text>          
+          <p id="team">For {{alert.channel}}</p>
         </ion-row>
         <ion-row>
           <p>{{alert.body}}</p>
         </ion-row>
         <ion-row>
-          <img *ngIf="alert.image !== ''" [src]="alert.image" alt="">
+          <img *ngIf="alert.image !== 'https://app.thefantasydoctorsapp.com/'" [src]="alert.image" alt="">
         </ion-row>
       </ion-col>
     </ion-item>

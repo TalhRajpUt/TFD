@@ -25,13 +25,15 @@ ion-content{
             height: 50px !important;
             width: 50px !important;
         }
-        ion-label{
+        h2{
             font-size: larger;
             font-weight: 600;
+            margin-bottom: -2px;
         }
-        ion-text{
+        #team{
             color: darkgray;
             font-weight: 600;
+            margin: 0px !important;
         }
         p{
             margin: 5px;
@@ -40,6 +42,7 @@ ion-content{
         }
         img{
                 border-radius: 10px;
+                height: 200px;
         }
     }
 }

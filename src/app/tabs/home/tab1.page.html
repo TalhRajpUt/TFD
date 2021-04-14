@@ -14,7 +14,7 @@
       <img src="../../../assets/baseBall.png" alt="">
     </ion-avatar>
     <ion-avatar [ngStyle]="{'border': activeHockey ? '#f2321c 3px solid' : 'none' }" (click)="showHocky()">
-      <img src="../../../assets/injuryReport.png" alt="">
+      <img src="../../../assets/injuryReport.jpeg" alt="">
     </ion-avatar>
 
 </div>
@@ -147,8 +147,8 @@
           </ion-avatar>
         </ion-col>
         <ion-col size=10>
-          <ion-card-title color="secondary">{{ video.snippet.title }}</ion-card-title>
-          <ion-label color="tertiary">
+          <ion-card-title color="light">{{ video.snippet.title }}</ion-card-title>
+          <ion-label color="light">
             <span>{{ video.snippet.channelTitle }} • {{ video.snippet.publishedAt | date: 'mediumDate' }} {{
               video.snippet.publishTime | date: 'shortTime' }}</span>
           </ion-label>
