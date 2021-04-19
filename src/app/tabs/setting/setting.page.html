@@ -12,7 +12,7 @@
     <ion-list >
       <ion-list-header>ACCOUNT</ion-list-header>
       <ion-item lines=none>
-        <ion-label slot="start">Mute Notification</ion-label>
+        <ion-label slot="start">Mute Notifications</ion-label>
           <ion-toggle (ionChange)='allNotifications($event)' [checked]='notificationSetting.ALL' mode='ios' slot='end'></ion-toggle>
       </ion-item>
       <ion-item disabled (click)="changePassword()" lines=none>
