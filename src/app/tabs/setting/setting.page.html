@@ -42,11 +42,15 @@
         <ion-label slot="start">Contact US</ion-label>
         <ion-icon color="primary" slot="end" name="mail"></ion-icon>
       </ion-item>
+      <ion-item (click)="openLink('https://twitter.com/messages/compose?recipient_id=1354439841551970305&text=Help,%20I’m%20facing%20an%20issue%20')">
+        <ion-label >DM US @TFDtheApp</ion-label>
+        <!-- <ion-icon color="primary" slot="end" name="mail"></ion-icon> -->
+      </ion-item>
       <ion-item lines=none (click)="openLink('https://thefantasydoctorsapp.com/privacy-policy/')">
         <ion-label slot="start">Privacy Policy</ion-label>
         <ion-icon color="primary" slot="end" name="link"></ion-icon>
       </ion-item>
-      <ion-item lines=none (click)="openLink('https://thefantasydoctors.com/')">
+      <ion-item lines=none (click)="openLink('https://thefantasydoctorsapp.com/')">
         <ion-label slot="start">About US</ion-label>
       </ion-item>
     </ion-list>
