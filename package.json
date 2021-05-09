@@ -51,6 +51,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.20.5",
     "codelyzer": "^6.0.0",
+    "cordova-android": "^9.1.0",
     "cordova-ios": "^6.2.0",
     "cordova-plugin-advanced-http": "^3.1.0",
     "cordova-plugin-device": "^2.0.3",
@@ -91,13 +92,19 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-whitelist": {},
+      "cordova-plugin-ionic-webview": {},
       "cordova-plugin-fcm-with-dependecy-updated": {
+        "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher",
+        "ANDROID_FCM_VERSION": "21.0.0",
+        "ANDROID_FIREBASE_BOM_VERSION": "26.0.0",
+        "ANDROID_GOOGLE_SERVICES_VERSION": "4.3.4",
+        "ANDROID_GRADLE_TOOLS_VERSION": "4.1.0",
         "IOS_FIREBASE_MESSAGING_VERSION": "~> 7.4.0"
-      },
-      "cordova-plugin-ionic-webview": {}
+      }
     },
     "platforms": [
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
