@@ -32,19 +32,19 @@ const routes: Routes = [
         loadChildren: () => import('./team/team.module').then(m => m.TeamPageModule)
       },
       {
-        path: 'alerts',
-        loadChildren: () => import('./alerts/alerts.module').then(m => m.AlertsPageModule)
+        path: 'odds',
+        loadChildren: () => import('./odds/odds.module').then( m => m.OddsPageModule)
       },
       {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/odds',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/tabs/odds',
     pathMatch: 'full'
   },
 ];

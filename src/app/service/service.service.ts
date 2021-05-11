@@ -49,6 +49,9 @@ export class ServiceService {
   beatBaseBall = '1365007256966807552';
   channelIdBaseBall = 'PLBUG1anWQC-QhPKtAFzLn8uadUhl4YCx3';
 
+  // betting Id
+  bettingId = '1387113321602719745';
+
   constructor(public toastController: ToastController, private router: Router) {
    }
 

@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'update-profile',
     loadChildren: () => import('./AuthPages/update-profile/update-profile.module').then( m => m.UpdateProfilePageModule)
   },
+  {
+    path: 'alerts',
+    loadChildren: () => import('./tabs/alerts/alerts.module').then(m => m.AlertsPageModule)
+  },
 ];
 @NgModule({
   imports: [

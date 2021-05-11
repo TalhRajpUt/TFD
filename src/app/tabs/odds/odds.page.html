@@ -1,42 +1,16 @@
-<ion-content color="dark" [fullscreen]="true" scrollEvents="true">
-
-  <div class='header'>
-    <ion-avatar [ngStyle]="{'border': activeBasketBall ? '#f2321c 3px solid' : 'none' }" (click)="showBasketBall()">
-      <img src="../../../assets/basketBall.png" alt="">
-    </ion-avatar>
-    <ion-avatar [ngStyle]="{'border': activeFootBall ? '#f2321c 3px solid' : 'none' }" (click)="showFootBall()">
-      <img src="../../../assets/football.png" alt="">
-    </ion-avatar>
-    <ion-thumbnail>
-      <img (click)="openLink()" src="../../../assets/icon.png" alt="">
-    </ion-thumbnail>
-    <ion-avatar [ngStyle]="{'border': activeBaseBall ? '#f2321c 3px solid' : 'none' }" (click)="showBaseBall()">
-      <img src="../../../assets/baseBall.png" alt="">
-    </ion-avatar>
-    <ion-avatar [ngStyle]="{'border': activeHockey ? '#f2321c 3px solid' : 'none' }" (click)="showHocky()">
-      <img src="../../../assets/injuryReport.jpeg" alt="">
-    </ion-avatar>
-
-</div>
-  <ion-segment color="primary" *ngIf="!this.switchToMasterList"  scrollable mode=md [(ngModel)]="segment" (ionChange)='tweetRequestBasketBall()'>
-    <ion-segment-button value="Injuries">
-      <ion-label color="dark">Injuries</ion-label>
+<ion-content color="dark">
+  <ion-segment color="primary"  scrollable mode=md [(ngModel)]="segment" (ionChange)='tweetRequestBasketBall()'>
+    <ion-segment-button value="tweets">
+      <ion-label color="dark">Tweets</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="news">
-      <ion-label color="dark">News</ion-label>
+    <ion-segment-button value="webView">
+      <ion-label color="dark">Odds Shopper</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="youtube">
-      <ion-icon size=large color='danger' name='logo-youtube'></ion-icon>
-    </ion-segment-button>
-    <ion-segment-button value="Beat">
-      <ion-label color="dark">Beat Writers</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="Fantasy">
-      <ion-label color="dark">Fantasy</ion-label>
+    <ion-segment-button value="bets">
+      <ion-label color="dark">Live Bets</ion-label>
     </ion-segment-button>
   </ion-segment>
 
-  <!-- Skelton Layout for Tweets-->
   <ion-row [hidden]="!isLoading" class="wrapper" *ngFor="let item of [1,1,1,1,1]">
     <ion-col class="skelton" size="2">
       <ion-avatar>
@@ -73,7 +47,7 @@
   </ion-row>
 
   <!-- Real Data for Tweets -->
-  <div class="tweets" *ngIf="!isLoading && segment !== 'youtube'">
+  <div class="tweets" *ngIf="!isLoading && segment !== 'webView'">
     <ion-row class="wrapper" *ngFor="let tweet of tweets">
       <ion-col size="2">
         <ion-avatar id="avatar">
@@ -137,39 +111,24 @@
 
   <ion-spinner color='danger' *ngIf="youtubeLoader"></ion-spinner>
   <!-- Real Data For Youtube Player -->
-  <div *ngIf="!isLoading && segment === 'youtube'">
-    <ion-card *ngFor="let video of videos">
-      <iframe width="100%" height="315" [src]="video.snippet.resourceId.videoId | youtube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <ion-row class="wrapper">
-        <ion-col size=2>
-          <ion-avatar item-left>
-            <img src="../../../assets/appIcon.jpeg" alt="">
-          </ion-avatar>
-        </ion-col>
-        <ion-col size=10>
-          <ion-card-title>{{ video.snippet.title }}</ion-card-title>
-          <ion-label>
-            <span>{{ video.snippet.channelTitle }} • {{ video.snippet.publishedAt | date: 'mediumDate' }} {{
-              video.snippet.publishTime | date: 'shortTime' }}</span>
-          </ion-label>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-    <ion-infinite-scroll color="primary" (ionInfinite)="loadVideos($event)">
-      <ion-infinite-scroll-content loadingSpinner="lines" loadingText="Loading more Videos...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+  <div *ngIf="!isLoading && segment === 'webView'">
+    <iframe src="https://oddsshopper.awesemo.com/"></iframe>
   </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
   <div class='noTweet' *ngIf="noTweet" >
     <img src="../../../assets/noTweet.svg" alt="">
     <h1 class="ion-text-center">Nothing Yet<br>Try Sometime Later</h1>
   </div>
-
-  <ion-fab routerLink="/alerts" routerDirection=forward vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
-      <ion-icon color="light" name="notifications"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
