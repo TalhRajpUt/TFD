@@ -5,6 +5,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
+import { AppRate } from '@ionic-native/app-rate/ngx';
 import { FCM } from 'plugins/cordova-plugin-fcm-with-dependecy-updated/ionic/ngx/FCM';
 // import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 
@@ -21,6 +22,7 @@ export class AppComponent {
               private fcm: FCM,
               // private twitter: TwitterConnect,
               // private router: Router
+              private appRate: AppRate,
               private service: ServiceService,
               private storage: Storage,
               private splashScreen: SplashScreen,
@@ -37,6 +39,46 @@ export class AppComponent {
     //   }
     // });
     this.navCtrl.navigateRoot('/tabs');
+    this.rateMyApp();
+  }
+
+  rateMyApp(){
+    this.appRate.preferences = {
+      usesUntilPrompt: 3,
+      storeAppURL: {
+       ios: '1216856883',
+       android: 'market://details?id=com.halfmad.tfd'
+      }
+    };
+    this.appRate.promptForRating(false);
+    // this.appRate.preferences = {
+    //   openStoreInApp: false,
+    //   displayAppName: 'Simons App',
+    //   usesUntilPrompt: 2,
+    //   promptAgainForEachNewVersion: false,
+    //   storeAppURL: {
+    //     ios: '1216856883',
+    //     android: 'market://details?id=com.devdactic.crossingnumbers'
+    //   },
+    //   customLocale: {
+    //     title: 'Do you enjoy %@?',
+    //     message: 'If you enjoy using %@, would you mind taking a moment to rate it? Thanks so much!',
+    //     cancelButtonLabel: 'No, Thanks',
+    //     laterButtonLabel: 'Remind Me Later',
+    //     rateButtonLabel: 'Rate It Now'
+    //   },
+    //   callbacks: {
+    //     onRateDialogShow: function(callback){
+    //       console.log('rate dialog shown!');
+    //     },
+    //     onButtonClicked: function(buttonIndex){
+    //       console.log('Selected index: -> ' + buttonIndex);
+    //     }
+    //   }
+    // };
+
+    // // Opens the rating immediately no matter what preferences you set
+    // this.appRate.promptForRating(true);
   }
 
   // twitterLogin(){

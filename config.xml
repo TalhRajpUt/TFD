@@ -3,7 +3,7 @@
     <name>TFD</name>
     <description>A Project of HalfMad Solutions.</description>
     <author email="halfmad.solution@gmail.com" href="https://halfmadsolutions.com/">HalfMad Solution</author>
-    <content original-src="index.html" src="http://localhost:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

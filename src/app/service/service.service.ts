@@ -33,7 +33,8 @@ export class ServiceService {
   fantasyFootball = '1367205926567112705';
   injuryFootball = '1367205783327375363';
   beatFootball = '1367205865149902856';
-  channelIdFootball = 'PLBUG1anWQC-R40pKxKXKlGxWWq3BnY5Qr';
+  // channelIdFootball = 'PLBUG1anWQC-R40pKxKXKlGxWWq3BnY5Qr';
+  channelIdFootball = 'PLBUG1anWQC-SIU-DGUKbiOmz7RPR4Jam5';
 
   // Hocky Ids
   newsHocky = '1367205678746583041';
