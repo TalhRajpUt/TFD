@@ -1,8 +1,41 @@
-<ion-content [fullscreen]="true">
-  <div class="hyperlink">
-      <div class="loader" *ngIf="spinner" >
-        <ion-img src='../../../assets/spinner.gif' alt='Loading'></ion-img>
-      </div>
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title color="light" mode=ios>
+      NFL Injury Tracker
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="dark">
+  <div class="loader" *ngIf="spinner" >
+    <ion-spinner color="light"></ion-spinner>
+  </div>
+  <!-- <div class="hyperlink">
       <iframe title="" src="https://thefantasydoctors.com/nba-injury-tracker/"></iframe>
+    </div> -->
+
+    <div class="body">
+      <div *ngFor="let team of nflData">
+        <ion-title *ngIf="team.reports.length > 0">
+            {{team.name}}
+        </ion-title>
+        <div *ngIf="team.reports.length > 0">
+          <ion-card mode=ios *ngFor="let subTeam of team.reports">
+            <img [hidden]="subTeam.link === 'null' || subTeam.link === null"  src="https://img.youtube.com/vi/{{ subTeam.link }}/hqdefault.jpg" alt="">
+            <ion-card-header>
+              <ion-card-subtitle>Injury: {{subTeam.injury}}<br>
+              RTP: {{ subTeam.rtp }}</ion-card-subtitle>
+              <ion-card-title>{{subTeam.player}}</ion-card-title>
+              <ion-label>{{subTeam.date | date: 'MMM dd, YYYY'}}</ion-label>
+            </ion-card-header>
+          </ion-card>
+        </div>
+      </div>
     </div>
+
+    <div class="noData" *ngIf="noData">
+      <img src="../../../assets/noreport.png" alt="">
+    </div> 
+
+
+
 </ion-content>

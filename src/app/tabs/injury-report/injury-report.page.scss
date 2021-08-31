@@ -1,19 +1,39 @@
 
 ion-content{
-    .hyperlink {
-        height: -webkit-fill-available;
-        width: 102%;
-        margin-left: -1%;
-        margin-top: -1%;
-        iframe {
-            height: -webkit-fill-available;
-            width: -webkit-fill-available;
-        }
-    }
+    // .hyperlink {
+    //     height: -webkit-fill-available;
+    //     width: 102%;
+    //     margin-left: -1%;
+    //     margin-top: -1%;
+    //     iframe {
+    //         height: -webkit-fill-available;
+    //         width: -webkit-fill-available;
+    //     }
+    // }
     .loader {
         position: absolute;
         width: 100%;
         height: unset;
-        top: 30%;
+        top: 40%;
+        text-align: center;
+        ion-spinner{
+            height: 50px;
+            width: 50px;
+        }
     }
+   .body{
+    ion-title{
+        display: block;
+        text-align: center;
+        font-size: x-large;
+        color: cadetblue;
+        margin-top: 10px;
+    }
+   }
+
+   .noData{
+    margin-top: 14vh;
+    display: block;
+    text-align: center;
+   }
 }
