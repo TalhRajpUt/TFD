@@ -7,7 +7,7 @@
 
 <ion-content color="dark" fullscreen>
 
-  <ion-segment *ngIf="!TeamOpen"  scrollable mode=md [(ngModel)]="segment" (ionChange)='filterList()'>
+  <!-- <ion-segment *ngIf="!TeamOpen"  scrollable mode=md [(ngModel)]="segment" (ionChange)='filterList()'>
     <ion-segment-button value="NBA">
       <ion-label color="dark">NBA</ion-label>
     </ion-segment-button>
@@ -20,7 +20,7 @@
     <ion-segment-button value="NHL">
       <ion-label color="dark">NHL</ion-label>
     </ion-segment-button>
-  </ion-segment>
+  </ion-segment> -->
   <ion-list *ngIf="!TeamOpen">
     <ion-item color="dark" *ngFor="let team of filterdList"  (click)="fetchTweets(team.id_str, team.name)">
       <ion-avatar slot="start">

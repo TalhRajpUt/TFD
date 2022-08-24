@@ -1,4 +1,4 @@
-<ion-content color="dark">
+<!-- <ion-content color="dark">
   <ion-segment color="primary"  scrollable mode=md [(ngModel)]="segment" (ionChange)='tweetRequestBasketBall()'>
     <ion-segment-button value="tweets">
       <ion-label color="dark">Tweets</ion-label>
@@ -46,7 +46,7 @@
     </ion-col>
   </ion-row>
 
-  <!-- Real Data for Tweets -->
+   Real Data for Tweets
   <div class="tweets" *ngIf="!isLoading && segment !== 'webView'">
     <ion-row class="wrapper" *ngFor="let tweet of tweets">
       <ion-col size="2">
@@ -110,25 +110,18 @@
   </div>
 
   <ion-spinner color='danger' *ngIf="youtubeLoader"></ion-spinner>
-  <!-- Real Data For Youtube Player -->
+ Real Data For Youtube Player
   <div *ngIf="!isLoading && segment === 'webView'">
     <iframe src="https://oddsshopper.awesemo.com/"></iframe>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
   <div class='noTweet' *ngIf="noTweet" >
     <img src="../../../assets/noTweet.svg" alt="">
     <h1 class="ion-text-center">Nothing Yet<br>Try Sometime Later</h1>
   </div>
+</ion-content> -->
+
+
+<ion-content>
+  <iframe src="https://docs.google.com/spreadsheets/d/1stJhJHzjFr6HVK1UoVgu5ivQHKcEQIn0fRcReNlBmCE"></iframe>
 </ion-content>

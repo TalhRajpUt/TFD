@@ -16,7 +16,7 @@ export class TeamPage implements OnInit {
   loadingTweets = false;
   id: string;
   loadingList = false;
-  segment = 'NBA';
+  segment = 'NFL';
   filterdList: any = [];
   title = 'Teams';
   TeamOpen = false;

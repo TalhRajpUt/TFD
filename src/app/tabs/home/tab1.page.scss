@@ -8,13 +8,27 @@ ion-content {
         background: var(--ion-color-dark);
 
         ion-thumbnail{
-            margin: -2% 10%;
-            height: 9vh;
-            width: 20vw;
-            --border-radius : 20px;
+            margin: 3% 2%;
+            height: 6.3vh;
+            width: 11vw;
+            --border-radius: 20px;
+
+            ion-icon{
+                // margin-top: 10px;
+            }
         }
+
+        #youtubeImg{
+            height: 30px;
+            width: 30px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
         ion-avatar{
-            padding: 2px 0px 0px 1px;        }
+            padding: 2px 0px 0px 1px;        
+            text-align: center;
+        }
     }
 
     ion-segment {
@@ -135,4 +149,31 @@ ion-content {
         width: 100%;
         margin-top: 30%;
     }
+
+    .newsFeed{
+        width: 96%;
+        margin: auto;
+        margin-top: 2vh !important;
+        border-radius: 10px;
+        --background: black;
+        box-shadow: rgb(191, 191, 191) 0px 0px 4px -400px;
+        img{
+            width: 100%;
+            height: auto;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        h6{
+            padding: 0px 10px;
+            color: white;
+        }
+
+        #created_at{
+            padding-right: 10px;
+            float: right;
+            font-size: 10px;
+            color: lightgray;
+        }
+    }
+
 }

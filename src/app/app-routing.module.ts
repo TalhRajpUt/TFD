@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./AuthPages/forget/forget.module').then( m => m.ForgetPageModule)
   },
   {
+    path: 'Injury',
+    loadChildren: () => import('./tabs/injury-report/injury-report.module').then(m => m.InjuryReportPageModule)
+  },
+  {
     path: 'update-profile',
     loadChildren: () => import('./AuthPages/update-profile/update-profile.module').then( m => m.UpdateProfilePageModule)
   },

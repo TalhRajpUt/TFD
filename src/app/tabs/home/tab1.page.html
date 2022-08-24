@@ -1,33 +1,42 @@
 <ion-content color="dark" [fullscreen]="true" scrollEvents="true">
 
   <div class='header'>
-    <ion-avatar [ngStyle]="{'border': activeBasketBall ? '#f2321c 3px solid' : 'none' }" (click)="showBasketBall()">
+    <!-- <ion-avatar [ngStyle]="{'border': activeBasketBall ? '#f2321c 3px solid' : 'none' }" (click)="showBasketBall()">
       <img src="../../../assets/basketBall.png" alt="">
-    </ion-avatar>
+    </ion-avatar> -->
     <ion-avatar [ngStyle]="{'border': activeFootBall ? '#f2321c 3px solid' : 'none' }" (click)="showFootBall()">
-      <img src="../../../assets/football.png" alt="">
+      <img src="../../../assets/nflhome.png" alt="">
     </ion-avatar>
-    <ion-thumbnail>
-      <img (click)="openLink()" src="../../../assets/icon.png" alt="">
+    <ion-avatar [ngStyle]="{'border': activeNflNews ? '#f2321c 3px solid' : 'none' }" (click)="showNFLNews()">
+      <img src="../../../assets/nfl.png" alt="">
+    </ion-avatar>
+    <ion-thumbnail (click)="openLink()">
+      <img src="../../../assets/icon.png" alt="">
     </ion-thumbnail>
-    <ion-avatar [ngStyle]="{'border': activeBaseBall ? '#f2321c 3px solid' : 'none' }" (click)="showBaseBall()">
+    <ion-avatar (click)="openYoutube()">
+      <img id="youtubeImg" src="../../../assets/youtube.svg" alt="" [ngStyle]="{'border': segment === 'youtube' ? 'white 2px solid' : 'none' }">
+    </ion-avatar>
+    <ion-thumbnail (click)="openInjuryReport()">
+      <img src="../../../assets/form.png" alt="">
+    </ion-thumbnail>
+    <!-- <ion-avatar [ngStyle]="{'border': activeBaseBall ? '#f2321c 3px solid' : 'none' }" (click)="showBaseBall()">
       <img src="../../../assets/baseBall.png" alt="">
     </ion-avatar>
     <ion-avatar [ngStyle]="{'border': activeHockey ? '#f2321c 3px solid' : 'none' }" (click)="showHocky()">
       <img src="../../../assets/injuryReport.jpeg" alt="">
-    </ion-avatar>
+    </ion-avatar> -->
 
 </div>
-  <ion-segment color="primary" *ngIf="!this.switchToMasterList"  scrollable mode=md [(ngModel)]="segment" (ionChange)='tweetRequestBasketBall()'>
+  <ion-segment color="primary" *ngIf="!this.switchToMasterList && !activeNflNews && segment !== 'youtube'"  scrollable mode=md [(ngModel)]="segment" (ionChange)='tweetRequestBasketBall()'>
     <ion-segment-button value="Injuries">
       <ion-label color="dark">Injuries</ion-label>
     </ion-segment-button>
     <ion-segment-button value="news">
       <ion-label color="dark">News</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="youtube">
+    <!-- <ion-segment-button value="youtube">
       <ion-icon size=large color='danger' name='logo-youtube'></ion-icon>
-    </ion-segment-button>
+    </ion-segment-button> -->
     <ion-segment-button value="Beat">
       <ion-label color="dark">Beat Writers</ion-label>
     </ion-segment-button>
@@ -35,6 +44,14 @@
       <ion-label color="dark">Fantasy</ion-label>
     </ion-segment-button>
   </ion-segment>
+
+  <div *ngIf="activeNflNews && !isLoading" >
+    <ion-card class="newsFeed" *ngFor="let news of nflNews">
+          <img [src]="news?.images[0]?.url" [alt]="news?.images[0]?.caption">
+        <h6>{{news?.headline}}</h6>
+        <p id="created_at">{{news?.published | date: 'short' }}</p>
+    </ion-card>
+  </div>
 
   <!-- Skelton Layout for Tweets-->
   <ion-row [hidden]="!isLoading" class="wrapper" *ngFor="let item of [1,1,1,1,1]">
