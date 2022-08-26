@@ -15,9 +15,12 @@ ion-tabs{
     }
 
     #medical{
-        --ionicon-stroke-width: 40px;
         border-radius: 100%;
-        --background: rgb(16, 186, 16);
-        background: rgb(16, 186, 16);;
+        height: 7vh;
+        width: 10vw;
+    }
+
+    #label{
+        font-size: 10px;
     }
 }

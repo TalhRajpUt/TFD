@@ -5,6 +5,8 @@ ion-content {
         flex-direction: row;
         justify-content: space-between;
         padding: 5% 2%;
+        position: sticky;
+        z-index: 99;
         background: var(--ion-color-dark);
 
         ion-thumbnail{

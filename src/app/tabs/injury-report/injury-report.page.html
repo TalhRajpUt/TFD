@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="dark">
     <ion-buttons>
       <ion-button>
@@ -14,9 +14,9 @@
   <div class="loader" *ngIf="spinner" >
     <ion-spinner color="light"></ion-spinner>
   </div>
-  <!-- <div class="hyperlink">
+   <div class="hyperlink">
       <iframe title="" src="https://thefantasydoctors.com/nba-injury-tracker/"></iframe>
-    </div> -->
+    </div>
 
     <div class="body">
       <div *ngFor="let team of nflData">
@@ -43,4 +43,18 @@
 
 
 
+</ion-content> -->
+<ion-header color="dark">
+  <ion-toolbar color="dark">
+    <ion-buttons>
+      <ion-button >
+        <ion-back-button mode="md"></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title mode="ios">Injury Report</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <iframe src="https://docs.google.com/spreadsheets/d/1stJhJHzjFr6HVK1UoVgu5ivQHKcEQIn0fRcReNlBmCE"></iframe>
 </ion-content>

@@ -10,6 +10,7 @@ ion-content{
     //         width: -webkit-fill-available;
     //     }
     // }
+    
     .loader {
         position: absolute;
         width: 100%;
@@ -36,4 +37,11 @@ ion-content{
     display: block;
     text-align: center;
    }
+}
+
+ion-content{
+    iframe{
+        height: 100vh;
+        width: 100vw;
+    }
 }

@@ -24,30 +24,30 @@ export class InjuryReportPage{
   //   this.spinner = false;
   // }
 
-  ionViewWillEnter(){
-    this.spinner = true;
-    this.noData = true;
-    this.http.get(this.service.reportUrl).subscribe((response) => {
-      this.nflData = response;
-      console.log(response);
-      if (!this.nflData.error){
-        this.nflData = this.nflData.reports;
-        this.nflData.forEach(team => {
-            if (team.reports.length > 0){
-              console.log('condiction satisfied');
-              this.noData = false;
-            }
-        });
-        this.spinner = false;
-      }else{
-        this.spinner = false;
-        this.service.presentToast('Something went wrong', 'bottom', 2000, 'danger');
-      }
-    }, (error) => {
-      this.spinner = false;
-      console.log(error);
-      this.service.presentToast(error.message, 'bottom', 2000, 'danger');
-    });
-  }
+  // ionViewWillEnter(){
+  //   this.spinner = true;
+  //   this.noData = true;
+  //   this.http.get(this.service.reportUrl).subscribe((response) => {
+  //     this.nflData = response;
+  //     console.log(response);
+  //     if (!this.nflData.error){
+  //       this.nflData = this.nflData.reports;
+  //       this.nflData.forEach(team => {
+  //           if (team.reports.length > 0){
+  //             console.log('condiction satisfied');
+  //             this.noData = false;
+  //           }
+  //       });
+  //       this.spinner = false;
+  //     }else{
+  //       this.spinner = false;
+  //       this.service.presentToast('Something went wrong', 'bottom', 2000, 'danger');
+  //     }
+  //   }, (error) => {
+  //     this.spinner = false;
+  //     console.log(error);
+  //     this.service.presentToast(error.message, 'bottom', 2000, 'danger');
+  //   });
+  // }
 
 }
