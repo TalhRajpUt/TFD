@@ -1,15 +1,16 @@
 import { Storage } from '@ionic/storage';
 import { NavController, Platform } from '@ionic/angular';
 import { ServiceService } from './../../service/service.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HTTP } from '@ionic-native/http/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
 
   tweets: any = [];
   isLoading = true;
@@ -39,6 +40,8 @@ export class Tab1Page {
   videos: any = [];
   nextPage = '';
   chanelId = '';
+  // tslint:disable-next-line:quotemark
+  marqueeText = "this is the text to show scroll horizontal, and default is scroll horizontal. you don't need to set the direction";
   noTweet = false;
   constructor(private http: HTTP, private service: ServiceService, private platform: Platform,
               private iab: InAppBrowser, private storage: Storage, private navCtrl: NavController) {
@@ -46,6 +49,11 @@ export class Tab1Page {
       console.log(response);
       this.clientSecert = response.token;
     });
+  }
+  ngOnInit() {
+    setTimeout(() => {
+      this.marqueeText = 'this is the text to show that text could be refreshed. but this feature support horizontal scroll only!';
+    }, 5000);
   }
 
   async tweetRequestBasketBall() {

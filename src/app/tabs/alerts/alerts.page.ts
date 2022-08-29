@@ -14,7 +14,9 @@ export class AlertsPage implements OnInit {
   constructor(private service: ServiceService, private platform: Platform, private http: HttpClient,
               private fcm: FCM) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.fetchNotifications();
+   }
 
   ionViewDidEnter(){
     this.fetchNotifications();
@@ -25,7 +27,6 @@ export class AlertsPage implements OnInit {
       this.notifications = response;
       if (this.notifications.error === false){
         this.notifications = this.notifications.notifications.reverse();
-        console.log(this.notifications);
       }
     }, (error) => {
       console.log(error);

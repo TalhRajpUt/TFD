@@ -1,7 +1,8 @@
 <ion-tabs>
 
+  <marquee *ngIf="selectedTab === 'Home'" (click)="openAlerts()" scrollamount="5">{{marqueeNews}}</marquee>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home">
+    <ion-tab-button tab="home" (click)="tabUpdated('Home')">
       <ion-icon name="home"></ion-icon>
       <ion-label>Home</ion-label>
     </ion-tab-button>
@@ -16,7 +17,7 @@
       <ion-label>Forum</ion-label>
     </ion-tab-button> -->
 
-    <ion-tab-button tab="team">
+    <ion-tab-button tab="team" (click)="tabUpdated('Team')">
       <ion-icon name="people"></ion-icon>
       <ion-label>Teams</ion-label>
     </ion-tab-button>
@@ -27,12 +28,12 @@
       </ion-thumbnail>
     </ion-tab-button> -->
 
-    <ion-tab-button tab="setting">
+    <ion-tab-button tab="setting" (click)="tabUpdated('Setting')">
       <ion-icon name="cog"></ion-icon>
       <ion-label>Settings</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="odds">
+    <ion-tab-button tab="odds" (click)="tabUpdated('Odds')">
       <img id="medical" src="../../assets/head.png" alt="">
       <!-- <ion-icon  color="light" name="add-outline"></ion-icon> -->
       <ion-label id="label">Injury History</ion-label>

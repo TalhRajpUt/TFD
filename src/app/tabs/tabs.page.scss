@@ -1,6 +1,11 @@
 ion-tabs{
     --background: var(--ion-color-dark);
 
+    marquee{
+        background: var(--ion-color-dark);
+        color: white;
+    }
+
     ion-tab-bar{
         --background: var(--ion-color-dark);
     }
