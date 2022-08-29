@@ -1,0 +1,14 @@
+<ion-header color="dark">
+  <ion-toolbar color="dark">
+    <ion-buttons>
+      <ion-button >
+        <ion-back-button mode="md" defaultHref="/tabs"></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title mode="ios">News</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <iframe [src]="newsLink | news"></iframe>
+</ion-content>

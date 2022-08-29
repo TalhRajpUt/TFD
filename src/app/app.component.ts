@@ -46,8 +46,13 @@ export class AppComponent {
     console.clear();
     // this.launchReview.launch()
     //   .then(() => console.log('Successfully launched store app'));
-    if (this.launchReview.isRatingSupported()) {
-      this.launchReview.rating().subscribe((status) => console.log('Successfully launched rating dialog', status));
+    if (this.launchReview.isRatingSupported() && localStorage.getItem('rating') !== '1') {
+      this.launchReview.rating().subscribe((status) => {
+        console.log('Successfully launched rating dialog', status);
+        if (status === 'dismissed') {
+          localStorage.setItem('rating', '1');
+        }
+      });
     }else{
       this.launchReview.launch().then((result) => {
         console.log(result);
@@ -67,16 +72,17 @@ export class AppComponent {
   }
 
   async fcmNotification() {
-    this.fcm.getToken().then(token => {
-      console.log(token);
-      this.storage.set('token', token).then();
-
-    });
 
     this.fcm.hasPermission().then((response) => {
       if (!response) {
         this.fcm.requestPushPermission().then();
       }
+    });
+
+    this.fcm.getToken().then(token => {
+      console.log(token);
+      this.storage.set('token', token).then();
+
     });
 
     this.fcm.onNotification().subscribe(async data => {

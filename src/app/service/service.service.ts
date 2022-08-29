@@ -19,6 +19,7 @@ export class ServiceService {
   youtubeUrl = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=';
   maxCount = 50;
   segment = 'forget';
+  currentNews = '';
 
   notifications: any = [];
 
@@ -35,7 +36,8 @@ export class ServiceService {
   injuryFootball = '1367205783327375363';
   beatFootball = '1367205865149902856';
   // channelIdFootball = 'PLBUG1anWQC-R40pKxKXKlGxWWq3BnY5Qr';
-  channelIdFootball = 'PLBUG1anWQC-SIU-DGUKbiOmz7RPR4Jam5';
+  // channelIdFootball = 'PLBUG1anWQC-SIU-DGUKbiOmz7RPR4Jam5';
+  channelIdFootball = 'PLBUG1anWQC-ToWiM1eHIFQVBKVp6q2dGK';
 
   // Hocky Ids
   newsHocky = '1367205678746583041';

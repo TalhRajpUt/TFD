@@ -46,10 +46,10 @@
   </ion-segment>
 
   <div *ngIf="activeNflNews && !isLoading" >
-    <ion-card class="newsFeed" *ngFor="let news of nflNews">
+    <ion-card class="newsFeed" *ngFor="let news of nflNews" (click)="openNews(news.links.mobile.href)">
           <img [src]="news?.images[0]?.url" [alt]="news?.images[0]?.caption">
         <h6>{{news?.headline}}</h6>
-        <p id="created_at">{{news?.published | date: 'short' }}</p>
+        <p id="created_at">{{news?.published | date: 'shortTime' }} {{news?.published | date: 'mediumDate' }}</p>
     </ion-card>
   </div>
 

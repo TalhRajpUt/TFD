@@ -40,8 +40,6 @@ export class Tab1Page implements OnInit {
   videos: any = [];
   nextPage = '';
   chanelId = '';
-  // tslint:disable-next-line:quotemark
-  marqueeText = "this is the text to show scroll horizontal, and default is scroll horizontal. you don't need to set the direction";
   noTweet = false;
   constructor(private http: HTTP, private service: ServiceService, private platform: Platform,
               private iab: InAppBrowser, private storage: Storage, private navCtrl: NavController) {
@@ -51,9 +49,6 @@ export class Tab1Page implements OnInit {
     });
   }
   ngOnInit() {
-    setTimeout(() => {
-      this.marqueeText = 'this is the text to show that text could be refreshed. but this feature support horizontal scroll only!';
-    }, 5000);
   }
 
   async tweetRequestBasketBall() {
@@ -171,9 +166,10 @@ export class Tab1Page implements OnInit {
     let baseUrl = '';
     this.youtubeLoader = true;
     baseUrl = this.service.youtubeUrl + this.chanelId +
-      '&order=date&type=video&maxResults=10&pageToken=' + this.nextPage + '&key=' + this.service.youtubeApiKey;
+      '&order=date&type=video&maxResults=10000&pageToken=' + this.nextPage + '&key=' + this.service.youtubeApiKey;
     await this.http.get(baseUrl, {}, {}).then((response) => {
       this.videosData = response.data;
+      console.log(this.videosData);
       this.videosData = JSON.parse(this.videosData);
       this.videos = this.videos.concat(this.videosData.items);
       this.youtubeLoader = false;
@@ -233,6 +229,15 @@ export class Tab1Page implements OnInit {
     this.activeNflNews = false;
     this.activeHockey = false;
     this.tweetRequestBasketBall();
+  }
+
+  openNews(link){
+    this.iab.create(link, '_blank', 'location=no,closebuttoncaption=close,mediaPlaybackRequiresUserAction=yes,hidenavigationbuttons=yes');
+    return;
+    this.service.currentNews = link;
+    console.log(link);
+    // return;
+    this.navCtrl.navigateForward('/news');
   }
 
   openInjuryReport(){
