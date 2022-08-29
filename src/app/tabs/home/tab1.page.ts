@@ -166,7 +166,7 @@ export class Tab1Page implements OnInit {
     let baseUrl = '';
     this.youtubeLoader = true;
     baseUrl = this.service.youtubeUrl + this.chanelId +
-      '&order=date&type=video&maxResults=10000&pageToken=' + this.nextPage + '&key=' + this.service.youtubeApiKey;
+      '&order=date&type=video&maxResults=10&pageToken=' + this.nextPage + '&key=' + this.service.youtubeApiKey;
     await this.http.get(baseUrl, {}, {}).then((response) => {
       this.videosData = response.data;
       console.log(this.videosData);
