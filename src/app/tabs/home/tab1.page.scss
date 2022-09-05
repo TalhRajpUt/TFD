@@ -10,9 +10,9 @@ ion-content {
         background: var(--ion-color-dark);
 
         ion-thumbnail{
-            margin: 3% 2%;
-            height: 6.3vh;
-            width: 11vw;
+            // margin: 3% 2%;
+            height: 7vh;
+            width: 7vh;
             --border-radius: 20px;
 
             ion-icon{
@@ -20,16 +20,18 @@ ion-content {
             }
         }
 
-        #youtubeImg{
-            height: 30px;
-            width: 30px;
-            text-align: center;
-            margin-top: 10px;
-        }
+        // #youtubeImg{
+        //     height: 30px;
+        //     width: 30px;
+        //     text-align: center;
+        //     margin-top: 10px;
+        // }
 
         ion-avatar{
             padding: 2px 0px 0px 1px;        
             text-align: center;
+            height: 7vh;
+            width: 7vh;
         }
     }
 
